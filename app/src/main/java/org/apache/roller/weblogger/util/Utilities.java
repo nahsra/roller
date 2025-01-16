@@ -212,7 +212,7 @@ public class Utilities {
      * Autoformat.
      */
     public static String autoformat(String s) {
-        return StringUtils.replace(s, "\n", "<br />");
+        return StringUtils.replace(s, "\n", BR);
     }
 
     /**
@@ -712,7 +712,7 @@ public class Utilities {
         // TODO: use a string buffer, ignore case !
         str = str.replace("<br>", "");
         str = str.replace("<br/>", "");
-        str = str.replace("<br />", "");
+        str = str.replace(BR, "");
         str = str.replace("<p></p>", "");
         str = str.replace("<p/>", "");
         str = str.replace("<p />", "");
@@ -962,7 +962,7 @@ public class Utilities {
         s = replace(s, CLOSING_I_TAG_PATTERN, "</i>");
         s = replace(s, OPENING_BLOCKQUOTE_TAG_PATTERN, "<blockquote>");
         s = replace(s, CLOSING_BLOCKQUOTE_TAG_PATTERN, "</blockquote>");
-        s = replace(s, BR_TAG_PATTERN, "<br />");
+        s = replace(s, BR_TAG_PATTERN, BR);
         s = replace(s, OPENING_P_TAG_PATTERN, "<p>");
         s = replace(s, CLOSING_P_TAG_PATTERN, "</p>");
         s = replace(s, OPENING_PRE_TAG_PATTERN, "<pre>");
@@ -1061,5 +1061,7 @@ public class Utilities {
         return tokens.length == 2 && StringUtils.isNotEmpty(tokens[0])
                 && StringUtils.isNotEmpty(tokens[1]);
     }
+    
+    private static final String BR = "<br />";
 
 }

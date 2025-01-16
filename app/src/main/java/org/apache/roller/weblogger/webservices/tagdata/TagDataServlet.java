@@ -91,14 +91,14 @@ public class TagDataServlet extends HttpServlet {
             siteWide = false;
             handle = pathInfo[1];
         } else {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Malformed URL");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, MALFORMED_URL);
             return;
         }
 
         String prefix = request.getParameter("prefix");
 
         if(prefix != null && !StringUtils.isAlphanumeric(prefix)) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Malformed URL");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, MALFORMED_URL);
             return;
         }
         
@@ -108,7 +108,7 @@ public class TagDataServlet extends HttpServlet {
             
             format = request.getParameter("format");
             if(!format.equals("json") && !format.equals("xml")) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Malformed URL");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, MALFORMED_URL);
                 return;
             }
         }
@@ -118,7 +118,7 @@ public class TagDataServlet extends HttpServlet {
             try {
                 page = Integer.parseInt(request.getParameter("page"));
             } catch (NumberFormatException notIgnored) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Malformed URL");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, MALFORMED_URL);
                 return;
             }
         }
@@ -186,7 +186,7 @@ public class TagDataServlet extends HttpServlet {
                         0, true);
                 int frequency = stat.getCount();
                 pw.print("<atom:category term=\"" + term + "\" tagdata:frequency=\"" + frequency + "\" ");
-                pw.println("tagdata:href=\"" + StringEscapeUtils.escapeXml10(viewURI) + "\" />");
+                pw.println("tagdata:href=\"" + StringEscapeUtils.escapeXml10(viewURI) + PRINTLN);
                 if (count++ > MAX) {
                     break;
                 }
@@ -194,16 +194,20 @@ public class TagDataServlet extends HttpServlet {
             if (tags.size() > MAX) {
                 // get next URI, if site-wide then don't specify weblog
                 String nextURI = urlstrat.getWeblogTagsJsonURL(weblog, true, page + 1);
-                pw.println("<atom:link rel=\"next\" href=\"" + StringEscapeUtils.escapeXml10(nextURI) + "\" />");
+                pw.println("<atom:link rel=\"next\" href=\"" + StringEscapeUtils.escapeXml10(nextURI) + PRINTLN);
             }
             if (page > 0) {
                 // get prev URI, if site-wide then don't specify weblog
                 String prevURI = urlstrat.getWeblogTagsJsonURL(weblog, true, page - 1);
-                pw.println("<atom:link rel=\"previous\" href=\"" + StringEscapeUtils.escapeXml10(prevURI) + "\" />");
+                pw.println("<atom:link rel=\"previous\" href=\"" + StringEscapeUtils.escapeXml10(prevURI) + PRINTLN);
             }
             pw.println("</categories>");
             response.flushBuffer();
         }
     }
+    
+    private static final String PRINTLN = "\" />";
+    
+    private static final String MALFORMED_URL = "Malformed URL";
 }
 

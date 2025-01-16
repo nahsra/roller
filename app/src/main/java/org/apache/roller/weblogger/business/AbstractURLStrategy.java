@@ -120,7 +120,7 @@ public abstract class AbstractURLStrategy implements URLStrategy {
         // put weblog handle parameter, if necessary
         Map<String, String> params = new HashMap<>();
         if(weblogHandle != null) {
-            params.put("weblog", weblogHandle);
+            params.put(WEBLOG, weblogHandle);
         }
         
         // add custom parameters if they exist
@@ -152,7 +152,7 @@ public abstract class AbstractURLStrategy implements URLStrategy {
         
         url.append("/roller-ui/authoring/entryAdd.rol");
         
-        Map<String, String> params = Map.of("weblog", weblogHandle);
+        Map<String, String> params = Map.of(WEBLOG, weblogHandle);
         
         return url.append(URLUtilities.getQueryString(params)).toString();
     }
@@ -174,7 +174,7 @@ public abstract class AbstractURLStrategy implements URLStrategy {
         
         url.append("/roller-ui/authoring/entryEdit.rol");
         
-        Map<String, String> params = Map.of("weblog", weblogHandle, "bean.id", entryId);
+        Map<String, String> params = Map.of(WEBLOG, weblogHandle, "bean.id", entryId);
         
         return url.append(URLUtilities.getQueryString(params)).toString();
     }
@@ -196,7 +196,7 @@ public abstract class AbstractURLStrategy implements URLStrategy {
         
         url.append("/roller-ui/authoring/weblogConfig.rol");
         
-        Map<String, String> params = Map.of("weblog", weblogHandle);
+        Map<String, String> params = Map.of(WEBLOG, weblogHandle);
         
         return url.append(URLUtilities.getQueryString(params)).toString();
     }
@@ -235,4 +235,6 @@ public abstract class AbstractURLStrategy implements URLStrategy {
         return url.toString();
     }
     
+    private static final String WEBLOG = "weblog";
+
 }

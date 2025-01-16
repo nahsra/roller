@@ -38,9 +38,9 @@ public class DerbyLifeCycle implements LifeCycle.Listener {
 
     @Override
     public void lifeCycleStarting(LifeCycle event) {
-        log.info("**************");
+        log.info(INFO);
         log.info("Starting Derby");
-        log.info("**************");
+        log.info(INFO);
         try {
             setupDerby();
             NetworkServerControl server = new NetworkServerControl();
@@ -53,9 +53,9 @@ public class DerbyLifeCycle implements LifeCycle.Listener {
 
     @Override
     public void lifeCycleStopped(LifeCycle event) {
-        log.info("**************");
+        log.info(INFO);
         log.info("Stopping Derby");
-        log.info("**************");
+        log.info(INFO);
         try {
             setupDerby();
             NetworkServerControl server = new NetworkServerControl();
@@ -65,4 +65,6 @@ public class DerbyLifeCycle implements LifeCycle.Listener {
             log.error("Error stopping Derby", e);
         }
     }
+    
+    private static final String INFO = "**************";
 }
