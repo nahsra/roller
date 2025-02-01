@@ -35,7 +35,7 @@ public class WSSEUtilities {
             byte[] nonce, byte[] created, byte[] password) {
         String result = null;
         try {
-            MessageDigest digester = MessageDigest.getInstance("SHA");
+            MessageDigest digester = MessageDigest.getInstance("SHA-256");
             digester.reset();
             digester.update(nonce);
             digester.update(created);
