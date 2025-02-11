@@ -48,15 +48,9 @@ import org.apache.roller.weblogger.ui.core.RollerContext;
 import org.apache.roller.weblogger.ui.core.plugins.UIPluginManager;
 import org.apache.roller.weblogger.ui.core.plugins.WeblogEntryEditor;
 import org.apache.roller.weblogger.ui.struts2.util.UIAction;
+import org.apache.roller.weblogger.util.*;
 import org.apache.roller.weblogger.util.cache.CacheManager;
-import org.apache.roller.weblogger.util.MailUtil;
-import org.apache.roller.weblogger.util.MediacastException;
-import org.apache.roller.weblogger.util.MediacastResource;
-import org.apache.roller.weblogger.util.MediacastUtil;
-import org.apache.roller.weblogger.util.RollerMessages;
 import org.apache.roller.weblogger.util.RollerMessages.RollerMessage;
-import org.apache.roller.weblogger.util.Trackback;
-import org.apache.roller.weblogger.util.TrackbackNotAllowedException;
 import org.apache.struts2.convention.annotation.AllowedMethods;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 
@@ -227,7 +221,7 @@ public final class EntryEdit extends UIAction {
                     try {
                         // Fetch MediaCast resource
                         log.debug("Checking MediaCast attributes");
-                        MediacastResource mediacast = MediacastUtil
+                        MediacastResource mediacast = NewMediacastUtil
                                 .lookupResource(getBean().getEnclosureURL());
 
                         // set mediacast attributes
