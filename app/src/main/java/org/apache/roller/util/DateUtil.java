@@ -35,6 +35,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class DateUtil {
     
+    private DateUtil() {
+    }
+    
     public static final long MILLIS_IN_DAY = 86400000;
     
     // a bunch of date formats

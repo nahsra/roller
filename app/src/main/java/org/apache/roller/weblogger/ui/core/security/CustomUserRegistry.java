@@ -41,6 +41,9 @@ import org.apache.roller.weblogger.pojos.User;
  */
 public class CustomUserRegistry {
     
+    private CustomUserRegistry() {
+    }
+    
     private static final Log LOG = LogFactory.getLog(CustomUserRegistry.class);
 
     private static final String DEFAULT_SNAME_LDAP_ATTRIBUTE = "screenname";

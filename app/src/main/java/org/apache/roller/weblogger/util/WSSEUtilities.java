@@ -31,6 +31,9 @@ import static java.nio.charset.StandardCharsets.UTF_8;
  * @author Dave Johnson
  */
 public class WSSEUtilities {
+    private WSSEUtilities() {
+    }
+    
     public static synchronized String generateDigest(
             byte[] nonce, byte[] created, byte[] password) {
         String result = null;

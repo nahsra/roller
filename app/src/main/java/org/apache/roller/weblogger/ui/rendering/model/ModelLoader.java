@@ -31,6 +31,9 @@ import org.apache.roller.weblogger.util.Utilities;
  */
 public class ModelLoader {
     
+    private ModelLoader() {
+    }
+    
     private static final Log log = LogFactory.getLog(ModelLoader.class);
     
     /**

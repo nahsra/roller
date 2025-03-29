@@ -28,6 +28,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
 class CommentAuthenticatorUtils {
+    private CommentAuthenticatorUtils() {
+    }
+    
     private static final Log log = LogFactory.getLog(CommentAuthenticatorUtils.class);
 
     public static Locale getLocale(HttpServletRequest request) {

@@ -39,6 +39,9 @@ import org.apache.velocity.app.VelocityEngine;
  */
 public class RollerVelocity {
     
+    private RollerVelocity() {
+    }
+    
     public static final String VELOCITY_CONFIG = "/WEB-INF/velocity.properties";
     
     private static final Log log = LogFactory.getLog(RollerVelocity.class);

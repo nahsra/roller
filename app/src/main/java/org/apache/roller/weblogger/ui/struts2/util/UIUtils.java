@@ -31,6 +31,9 @@ import java.util.TimeZone;
  */
 public final class UIUtils {
     
+    private UIUtils() {
+    }
+    
     private static final List<Locale> LOCALES;
     private static final List<String> TIME_ZONES;
     

@@ -31,6 +31,9 @@ import org.apache.commons.codec.binary.Hex;
  */
 public final class RegexUtil {
     
+    private RegexUtil() {
+    }
+    
     public static final Pattern MAILTO_PATTERN =
             Pattern.compile("mailto:([a-zA-Z0-9\\.\\-]+@[a-zA-Z0-9\\.\\-]+\\.[a-zA-Z0-9]+)");
 

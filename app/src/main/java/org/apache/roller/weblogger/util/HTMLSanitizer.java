@@ -49,6 +49,9 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.apache.roller.weblogger.config.WebloggerConfig;
 
 public class HTMLSanitizer {
+    private HTMLSanitizer() {
+    }
+    
     public static Boolean xssEnabled = WebloggerConfig.getBooleanProperty("weblogAdminsUntrusted", Boolean.FALSE);
 
     public static Pattern forbiddenTags = Pattern.compile("^(script|object|embed|link|style|form|input)$");
