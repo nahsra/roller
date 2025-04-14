@@ -464,7 +464,6 @@ public class MediaFileTest  {
                 assertNotNull(mf.getId().length() > 0);
             }
 
-            String id3 = null;
             {
                 testWeblog = TestUtils.getManagedWebsite(testWeblog);
                 rootDirectory = mfMgr.getMediaFileDirectory(rootDirectory
