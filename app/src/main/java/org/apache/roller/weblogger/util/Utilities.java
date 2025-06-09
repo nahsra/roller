@@ -1,5 +1,6 @@
 package org.apache.roller.weblogger.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -389,7 +390,7 @@ public class Utilities {
         StringBuilder sb = new StringBuilder();
         BufferedReader in = new BufferedReader(new InputStreamReader(is));
         String line;
-        while ((line = in.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null) {
             sb.append(line);
             sb.append(System.getProperty("line.separator"));
         }
