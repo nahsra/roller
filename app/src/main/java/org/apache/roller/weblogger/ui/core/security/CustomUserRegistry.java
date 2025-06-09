@@ -21,9 +21,6 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 
-import javax.naming.NamingException;
-import javax.naming.directory.Attribute;
-import javax.naming.directory.Attributes;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.roller.weblogger.config.AuthMethod;
