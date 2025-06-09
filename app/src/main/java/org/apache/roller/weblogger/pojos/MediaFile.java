@@ -198,12 +198,6 @@ public class MediaFile implements Serializable {
         return tagSet;
     }
 
-    private void setTags(Set<MediaFileTag> tagSet) throws WebloggerException {
-        this.tagSet = tagSet;
-        this.removedTags = new HashSet<>();
-        this.addedTags = new HashSet<>();
-    }
-
     /**
      * Roller lowercases all tags based on locale because there's not a 1:1
      * mapping between uppercase/lowercase characters across all languages.

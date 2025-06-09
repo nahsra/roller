@@ -154,10 +154,6 @@ public class WeblogBookmarkFolder implements Serializable, Comparable<WeblogBook
         return this.bookmarks;
     }
     
-    // this is private to force the use of add/remove bookmark methods.
-    private void setBookmarks(List<WeblogBookmark> bookmarks) {
-        this.bookmarks = bookmarks;
-    }
 
     /** 
      * Add a bookmark to this folder.

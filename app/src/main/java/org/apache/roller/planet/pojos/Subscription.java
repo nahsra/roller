@@ -170,20 +170,13 @@ public class Subscription implements Serializable, Comparable<Subscription> {
         return groups;
     }
     
-    // private because there is no need for people to do this
-    private void setGroups(Set<PlanetGroup> groups) {
-        this.groups = groups;
-    }
 
     
     public Set<SubscriptionEntry> getEntries() {
         return entries;
     }
     
-    // private because there is no need for people to do this
-    private void setEntries(Set<SubscriptionEntry> entries) {
-        this.entries = entries;
-    }
+
     
     
     /**

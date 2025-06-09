@@ -235,10 +235,6 @@ public class UtilitiesModel implements Model {
         return StringUtils.replace(src, target, rWith, maxCount);
     }
     
-    private String replace(String string, Pattern pattern, String replacement) {
-        Matcher m = pattern.matcher(string);
-        return m.replaceAll(replacement);
-    }
     
     /**
      * Remove occurences of html, defined as any text
