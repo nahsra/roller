@@ -26,19 +26,19 @@ function setCookie(name, value, expires, path, domain, secure=true, sameSite=tru
 
 /* This function is used to get cookies */
 function getCookie(name) {
-	var prefix = name + "=";
-	var start = document.cookie.indexOf(prefix);
+	const prefix = name + "=";
+	let start = document.cookie.indexOf(prefix);
 
 	if (start===-1) {
 		return null;
 	}
 
-	var end = document.cookie.indexOf(";", start+prefix.length);
+	let end = document.cookie.indexOf(";", start+prefix.length);
 	if (end===-1) {
 		end=document.cookie.length;
 	}
 
-	var value=document.cookie.substring(start+prefix.length, end);
+	const value=document.cookie.substring(start+prefix.length, end);
 	return unescape(value);
 }
 
@@ -53,7 +53,7 @@ function deleteCookie(name,path,domain) {
 }
 
 function rememberUser(theForm) {
-    var expires = new Date();
+    const expires = new Date();
     expires.setTime(expires.getTime() + 24 * 365 * 60 * 60 * 1000); // sets it for approx 365 days.
     // sets it for entire domain, so freeroller will remember for all users
     setCookie("commentAuthor",theForm.name.value,expires,"/");
@@ -81,7 +81,7 @@ function toggle(targetId) {
 
 /* The toggleFolder and togglePlusMinus functions are for expanding/contracting folders */
 function toggleFolder(targetId) {
-    var expanded;
+    let expanded;
     if (document.getElementById) {
         target = document.getElementById(targetId);
     	if (target.style.display === "none") {
@@ -94,7 +94,7 @@ function toggleFolder(targetId) {
         togglePlusMinus("i" + targetId);
 
         // set a cookie to remember this preference
-        var expires = new Date();
+        const expires = new Date();
         expires.setTime(expires.getTime() + 24 * 365 * 60 * 60 * 1000); // sets it for approx 365 days.
         setCookie("rfolder-"+targetId,expanded,expires,"/");
     }
@@ -113,10 +113,10 @@ function togglePlusMinus(targetId) {
 
 /* This function is to set folders to expand/contract based on a user's preference */
 function folderPreference(folderId) {
-    var folderCookie = getCookie("rfolder-"+folderId);
+    const folderCookie = getCookie("rfolder-"+folderId);
     if (folderCookie != null) { // we have user's last setting
-        var folder = document.getElementById(folderId);
-        var plusMinus = document.getElementById("i"+folderId);
+        let folder = document.getElementById(folderId);
+        const plusMinus = document.getElementById("i"+folderId);
         if (folderCookie === "true") { // show
             folder.style.display = "";
             plusMinus.innerHTML = "-";
@@ -128,18 +128,18 @@ function folderPreference(folderId) {
 }
 
 function toggleNextRow(e) {
-    var checked;
+    let checked;
     if (e.type === "checkbox") {
         checked = e.checked;
     } else if (e.type === "radio") {
-        var v = e.value;
+        let v = e.value;
         checked = (v === "1" || v === "y" || v === "true");
     }
     // var nextRow = e.parentNode.parentNode.nextSibling;
     // the above doesn't work on Mozilla since it treats white space as nodes
-    var thisRow = e.parentNode.parentNode;
-    var tableBody = thisRow.parentNode;
-    var nextRow = tableBody.getElementsByTagName("tr")[thisRow.rowIndex+1];
+    const thisRow = e.parentNode.parentNode;
+    const tableBody = thisRow.parentNode;
+    const nextRow = tableBody.getElementsByTagName("tr")[thisRow.rowIndex+1];
 
     if (checked === true) {
         nextRow.style.display = "";
@@ -149,7 +149,7 @@ function toggleNextRow(e) {
 }
 
 function toggleControl(toggleId, targetId) {
-    var expanded;
+    let expanded;
     if (document.getElementById) {
         target = document.getElementById(targetId);
         toggle = document.getElementById(toggleId);
@@ -164,15 +164,15 @@ function toggleControl(toggleId, targetId) {
         togglePlusMinus("i" + targetId);
 
         // set a cookie to remember this preference
-        var expires = new Date();
+        const expires = new Date();
         expires.setTime(expires.getTime() + 24 * 365 * 60 * 60 * 1000); // sets it for approx 365 days.
         setCookie("control_"+targetId,expanded,expires,"/");
     }
 }
 
 function isblank(s) {
-   for (var i=0; i<s.length; s++) {
-      var c = s.charAt(i);
+   for (let i=0; i<s.length; s++) {
+      let c = s.charAt(i);
       if ((c!==' ') && (c!=='\n') && (c!=='')) return false;
    }
     return true;
@@ -183,8 +183,8 @@ window.defaultStatus=document.title;
 
 // Toggle check boxes
 function toggleFunctionAll(toggleValue) {
-	var inputs = document.getElementsByTagName('input');
-	for(var i = 0; i < inputs.length ; i++) {
+	const inputs = document.getElementsByTagName('input');
+	for(let i = 0; i < inputs.length ; i++) {
 		if(inputs[i].name !== "control" && inputs[i].type === 'checkbox' && inputs[i].disabled === false ) {
 			if (inputs[i].checked === true){
 				inputs[i].checked = !inputs[i].checked;
@@ -196,8 +196,8 @@ function toggleFunctionAll(toggleValue) {
 }
 
 function toggleFunction(toggleValue,name) {
-	var inputs = document.getElementsByName(name);
-	for(var i = 0; i < inputs.length ; i++) {
+	const inputs = document.getElementsByName(name);
+	for(let i = 0; i < inputs.length ; i++) {
 		if(inputs[i].type === 'checkbox' && inputs[i].disabled === false) {
            inputs[i].checked = toggleValue;
 		}

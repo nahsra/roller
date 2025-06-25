@@ -17,7 +17,7 @@
 */
 // global vars for access from callback function
 var req = false;
-var element;
+let element;
 
 function clientSideInclude(id, url) {
   // For Safari, Firefox, and other non-MS browsers

@@ -5,23 +5,23 @@
 /* Modified 20081218 to scroll to first hit like
    http://www.woolyss.free.fr/js/searchhi_Woolyss.js and say when not found */
 
-var searchhi = {
+const searchhi = {
   highlightWord: function(node,word) {
     // Iterate into this nodes childNodes
     if (node.hasChildNodes) {
-	    for (var hi_cn=0;hi_cn<node.childNodes.length;hi_cn++) {
+	    for (let hi_cn=0;hi_cn<node.childNodes.length;hi_cn++) {
 		    searchhi.highlightWord(node.childNodes[hi_cn],word);
 	    }
     }
 
     // And do this node itself
     if (node.nodeType == 3) { // text node
-	    var tempNodeVal = node.nodeValue.toLowerCase();
-	    var tempWordVal = word.toLowerCase();
+	    const tempNodeVal = node.nodeValue.toLowerCase();
+	    const tempWordVal = word.toLowerCase();
 	    if (tempNodeVal.indexOf(tempWordVal) != -1) {
-		    var pn = node.parentNode;
+		    const pn = node.parentNode;
 		    // check if we're inside a "nosearchhi" zone
-		    var checkn = pn;
+		    const checkn = pn;
 		    while (checkn.nodeType != 9 &&
 		    checkn.nodeName.toLowerCase() != 'body') {
 		    // 9 = top of doc
@@ -30,14 +30,14 @@ var searchhi = {
 		    }
 		    if (pn.className != "searchword") {
 			    // word has not already been highlighted!
-			    var nv = node.nodeValue;
-			    var ni = tempNodeVal.indexOf(tempWordVal);
+			    const nv = node.nodeValue;
+			    const ni = tempNodeVal.indexOf(tempWordVal);
 			    // Create a load of replacement nodes
-			    var before = document.createTextNode(nv.substr(0,ni));
-			    var docWordVal = nv.substr(ni,word.length);
-			    var after = document.createTextNode(nv.substr(ni+word.length));
-			    var hiwordtext = document.createTextNode(docWordVal);
-			    var hiword = document.createElement("span");
+			    const before = document.createTextNode(nv.substr(0,ni));
+			    const docWordVal = nv.substr(ni,word.length);
+			    const after = document.createTextNode(nv.substr(ni+word.length));
+			    const hiwordtext = document.createTextNode(docWordVal);
+			    const hiword = document.createElement("span");
 			    hiword.className = "searchword";
 			    hiword.appendChild(hiwordtext);
 			    pn.insertBefore(before,node);
@@ -52,16 +52,16 @@ var searchhi = {
   },
 
   googleSearchHighlight: function() {
-    var ref = document.referrer;
+    const ref = document.referrer;
     if (ref.indexOf(searchhi_config.ignore_site) == 0) return;
     if (ref.indexOf('?') == -1) return;
-    var qs = ref.substr(ref.indexOf('?')+1);
-    var qsa = qs.split('&');
-    for (var i=0;i<qsa.length;i++) {
-	    var qsip = qsa[i].split('=');
+    const qs = ref.substr(ref.indexOf('?')+1);
+    const qsa = qs.split('&');
+    for (let i=0;i<qsa.length;i++) {
+	    const qsip = qsa[i].split('=');
       if (qsip.length == 1) continue;
       if (qsip[0] == 'q' || qsip[0] == 'p') { // q= for Google, p= for Yahoo
-		    var wordstring = unescape(qsip[1].replace(/\+/g,' '));
+		    const wordstring = unescape(qsip[1].replace(/\+/g,' '));
 		    searchhi.process(wordstring);
       }
     }
@@ -69,8 +69,8 @@ var searchhi = {
 
   process: function(wordstring) {
     searchhi.found = 0;
-    var words = wordstring.split(/\s+/);
-    for (var w=0;w<words.length;w++) {
+    const words = wordstring.split(/\s+/);
+    for (let w=0;w<words.length;w++) {
 	    searchhi.highlightWord(document.getElementsByTagName("body")[0],words[w]);
     }
     if (searchhi.found === 0) {
@@ -84,12 +84,12 @@ var searchhi = {
   init: function() {
     if (!document.createElement || !document.getElementsByTagName) return;
     // hook up forms of type searchhi
-    var frms = document.getElementsByTagName("form");
-    for (var i=0; i<frms.length; i++) {
+    const frms = document.getElementsByTagName("form");
+    for (let i=0; i<frms.length; i++) {
       if (frms[i].className.match(/\bsearchhi\b/)) {
         frms[i].onsubmit = function() {
-          var inps = this.getElementsByTagName("input");
-          for (var j=0; j<inps.length; j++) {
+          const inps = this.getElementsByTagName("input");
+          for (let j=0; j<inps.length; j++) {
             if (inps[j].type == "text") {
               searchhi.process(inps[j].value);
               return false;
@@ -103,10 +103,10 @@ var searchhi = {
   }
 };
 
-(function(i) {var u =navigator.userAgent;var e=/*@cc_on!@*/false; var st =
-setTimeout;if(/webkit/i.test(u)){st(function(){var dr=document.readyState;
+(function(i) {const u =navigator.userAgent;const e=/*@cc_on!@*/false; const st =
+setTimeout;if(/webkit/i.test(u)){st(function(){let dr=document.readyState;
 if(dr=="loaded"||dr=="complete"){i()}else{st(arguments.callee,10);}},10);}
 else if((/mozilla/i.test(u)&&!/(compati)/.test(u)) || (/opera/i.test(u))){
 document.addEventListener("DOMContentLoaded",i,false); } else if(e){     (
-function(){var t=document.createElement('doc:rdy');try{t.doScroll('left');
+function(){let t=document.createElement('doc:rdy');try{t.doScroll('left');
 i();t=null;}catch(e){st(arguments.callee,0);}})();}else{window.onload=i;}})(searchhi.init);

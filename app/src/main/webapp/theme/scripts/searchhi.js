@@ -20,7 +20,7 @@
 function highlightWord(node,word) {
 	// Iterate into this nodes childNodes
 	if (node.hasChildNodes) {
-		var hi_cn;
+		let hi_cn;
 		for (hi_cn=0;hi_cn<node.childNodes.length;hi_cn++) {
 			highlightWord(node.childNodes[hi_cn],word);
 		}
@@ -28,20 +28,20 @@ function highlightWord(node,word) {
 
 	// And do this node itself
 	if (node.nodeType == 3) { // text node
-		var tempNodeVal = node.nodeValue.toLowerCase();
-		var tempWordVal = word.toLowerCase();
+		const tempNodeVal = node.nodeValue.toLowerCase();
+		const tempWordVal = word.toLowerCase();
 		if (tempNodeVal.indexOf(tempWordVal) != -1) {
-			var pn = node.parentNode;
+			let pn = node.parentNode;
 			if (pn.className != "searchword") {
 				// word has not already been highlighted!
-				var nv = node.nodeValue;
-				var ni = tempNodeVal.indexOf(tempWordVal);
+				const nv = node.nodeValue;
+				const ni = tempNodeVal.indexOf(tempWordVal);
 				// Create a load of replacement nodes
-				var before = document.createTextNode(nv.substr(0,ni));
-				var docWordVal = nv.substr(ni,word.length);
-				var after = document.createTextNode(nv.substr(ni+word.length));
-				var hiwordtext = document.createTextNode(docWordVal);
-				var hiword = document.createElement("span");
+				const before = document.createTextNode(nv.substr(0,ni));
+				const docWordVal = nv.substr(ni,word.length);
+				const after = document.createTextNode(nv.substr(ni+word.length));
+				const hiwordtext = document.createTextNode(docWordVal);
+				const hiword = document.createElement("span");
 				hiword.className = "searchword";
 				hiword.appendChild(hiwordtext);
 				pn.insertBefore(before,node);
@@ -55,16 +55,16 @@ function highlightWord(node,word) {
 
 function googleSearchHighlight() {
 	if (!document.createElement) return;
-	var ref = document.referrer;
+	const ref = document.referrer;
 	if (ref.indexOf('?') == -1) return;
-	var qs = ref.substr(ref.indexOf('?')+1);
-	var qsa = qs.split('&');
-	for (var i=0;i<qsa.length;i++) {
-		var qsip = qsa[i].split('=');
+	const qs = ref.substr(ref.indexOf('?')+1);
+	const qsa = qs.split('&');
+	for (let i=0;i<qsa.length;i++) {
+		const qsip = qsa[i].split('=');
         if (qsip.length == 1) continue;
         if (qsip[0] == 'q' || qsip[0] == 'p') { // q= for Google, p= for Yahoo
-            var words = unescape(qsip[1].replace(/\+/g,' ')).split(/\s+/);
-            for (var w=0;w<words.length;w++) {
+            const words = unescape(qsip[1].replace(/\+/g,' ')).split(/\s+/);
+            for (let w=0;w<words.length;w++) {
                 highlightWord(document.getElementsByTagName("body")[0],words[w]);
             }
         }
@@ -75,9 +75,9 @@ function highlightTerm() {
     if (!document.createElement) return;
     // ensure this only executes when showing search results
     if (document.getElementById("searchAgain")) {
-        var searchTerm = document.getElementById("q").value;
-        var words = unescape(searchTerm.replace(/\+/g,' ')).split(/\s+/);
-        for (var w=0;w<words.length;w++) {
+        const searchTerm = document.getElementById("q").value;
+        const words = unescape(searchTerm.replace(/\+/g,' ')).split(/\s+/);
+        for (let w=0;w<words.length;w++) {
             highlightWord(document.getElementsByTagName("body")[0],words[w]);
         }
     }

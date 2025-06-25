@@ -19,8 +19,8 @@
 // Used in: MemberInvite.jsp, UserAdmin.jsp
 
 function createRequestObject() {
-    var ro;
-    var browser = navigator.appName;
+    let ro;
+    const browser = navigator.appName;
     if (browser === "Microsoft Internet Explorer") {
         ro = new ActiveXObject("Microsoft.XMLHTTP");
     } else {
@@ -29,38 +29,38 @@ function createRequestObject() {
     return ro;
 }
 
-var http = createRequestObject();
-var init = false;
-var isBusy = false;
-var userURL = "<%= request.getContextPath() %>" + "/roller-ui/authoring/userdata?length=50";
+const http = createRequestObject();
+let init = false;
+let isBusy = false;
+const userURL = "<%= request.getContextPath() %>" + "/roller-ui/authoring/userdata?length=50";
 
 function onUserNameFocus(enabled) {
     if (!init) {
         init = true;
-        var u = userURL;
+        const u = userURL;
         if (enabled != null) u = u + "&enabled=" + enabled;
         sendUserRequest(u);
     } else {
-        var userSubmitButton = document.getElementById("user-submit");
+        const userSubmitButton = document.getElementById("user-submit");
         userSubmitButton.disabled = true;
     }
 }
 
 function onUserNameChange(enabled) {
-    var u = userURL;
+    const u = userURL;
     if (enabled != null) u = u + "&enabled=" + enabled;
-    var userName = document.getElementById("userName");
+    const userName = document.getElementById("userName");
     if (userName.value.length > 0) u = u + "&startsWith=" + userName.value;
     sendUserRequest(u);
 }
 
 function onUserSelected() {
-    var userList = document.getElementById("userList");
-    var user = userList.options[userList.options.selectedIndex];
-    var userName = document.getElementById("userName");
+    const userList = document.getElementById("userList");
+    const user = userList.options[userList.options.selectedIndex];
+    const userName = document.getElementById("userName");
     userName.value = user.value;
 
-    var userSubmitButton = document.getElementById("user-submit");
+    const userSubmitButton = document.getElementById("user-submit");
     userSubmitButton.disabled = false;
 }
 
@@ -74,16 +74,16 @@ function sendUserRequest(url) {
 
 function handleUserResponse() {
     if (http.readyState === 4) {
-        var userList = document.getElementById("userList");
+        const userList = document.getElementById("userList");
         for (let i = userList.options.length; i >= 0; i--) {
             userList.options[i] = null;
         }
-        var data = http.responseText;
+        const data = http.responseText;
         if (data.indexOf("\n") !== -1) {
-            var lines = data.split('\n');
+            const lines = data.split('\n');
             for (let i = 0; i < lines.length; i++) {
                 if (lines[i].indexOf(',') !== -1) {
-                   var userArray = lines[i].split(',');
+                   const userArray = lines[i].split(',');
                    userList.options[userList.length] =
                       new Option(userArray[0] + " (" + userArray[1] + ")", userArray[0]);
                 }
