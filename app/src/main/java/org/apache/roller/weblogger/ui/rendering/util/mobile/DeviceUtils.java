@@ -31,6 +31,9 @@ import org.springframework.web.context.request.RequestAttributes;
  */
 public class DeviceUtils {
 
+private DeviceUtils() {
+}
+
 	/**
 	 * The name of the request attribute the current Device is indexed by. The
 	 * attribute name is 'currentDevice'.

@@ -30,6 +30,9 @@ import java.util.TimeZone;
  */
 public class ISO8601DateParser {
 
+private ISO8601DateParser() {
+}
+
     // 2004-06-14T19:GMT20:30Z
     // 2004-06-20T06:GMT22:01Z
 

@@ -37,6 +37,9 @@ import org.apache.roller.util.RollerConstants;
  */
 public class Utilities {
     /** The <code>Log</code> instance for this class. */
+    private Utilities() {
+    }
+    
     private static final Log mLogger = LogFactory.getLog(Utilities.class);
 
     public static final String TAG_SPLIT_CHARS = " ,\n\r\f\t";
