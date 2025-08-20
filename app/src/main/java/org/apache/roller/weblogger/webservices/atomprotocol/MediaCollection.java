@@ -84,7 +84,7 @@ public class MediaCollection {
     
     
     public Entry postMedia(AtomRequest areq, Entry entry) throws AtomException {
-        log.debug("Entering");
+        log.debug(ENTERING);
         String[] pathInfo = StringUtils.split(areq.getPathInfo(),"/");
 
         try {
@@ -102,7 +102,7 @@ public class MediaCollection {
             MediaFileManager fileMgr = roller.getMediaFileManager();
             Weblog website = WebloggerFactory.getWeblogger().getWeblogManager().getWeblogByHandle(handle);
             if (!RollerAtomHandler.canEdit(user, website)) {
-                throw new AtomNotAuthorizedException("Not authorized to edit weblog: " + handle);
+                throw new AtomNotAuthorizedException(NOT_AUTHORIZED_TO_EDIT_WEBLOG + handle);
             }
             if (pathInfo.length > 1) {
                 // Save to temp file
@@ -155,7 +155,7 @@ public class MediaCollection {
                     for (Object objLink : mediaEntry.getOtherLinks()) {
                         Link link = (Link) objLink;
                         if ("edit".equals(link.getRel())) {
-                            log.debug("Exiting");
+                            log.debug(EXITING);
                             return mediaEntry;
                         }
                     }
@@ -173,9 +173,9 @@ public class MediaCollection {
             throw new AtomException("Error saving media entry");
         
         } catch (WebloggerException re) {
-            throw new AtomException("Posting media", re);
+            throw new AtomException(POSTING_MEDIA, re);
         } catch (IOException ioe) {
-            throw new AtomException("Posting media", ioe);
+            throw new AtomException(POSTING_MEDIA, ioe);
         }
     }
     
@@ -185,14 +185,14 @@ public class MediaCollection {
             String[] pathInfo = Utilities.stringToStringArray(areq.getPathInfo(), "/");
 
             String filePath = filePathFromPathInfo(pathInfo);
-            filePath = filePath.substring(0, filePath.length() - ".media-link".length());
+            filePath = filePath.substring(0, filePath.length() - MEDIA_LINK.length());
             String handle = pathInfo[0];
             Weblog website = roller.getWeblogManager().getWeblogByHandle(handle);
 
             MediaFileManager fileMgr = roller.getMediaFileManager();
             MediaFile mf = fileMgr.getMediaFileByPath(website, filePath);
 
-            log.debug("Exiting");
+            log.debug(EXITING);
             if (mf != null) {
                 return createAtomResourceEntry(website, mf);
             }
@@ -205,7 +205,7 @@ public class MediaCollection {
     
     
     public AtomMediaResource getMediaResource(AtomRequest areq) throws AtomException {
-        log.debug("Entering");
+        log.debug(ENTERING);
         String[] pathInfo = StringUtils.split(areq.getPathInfo(),"/");
         try {
             // authenticated client posted a weblog entry
@@ -213,7 +213,7 @@ public class MediaCollection {
             MediaFileManager fmgr = roller.getMediaFileManager();
             Weblog website = WebloggerFactory.getWeblogger().getWeblogManager().getWeblogByHandle(handle);
             if (!RollerAtomHandler.canEdit(user, website)) {
-                throw new AtomNotAuthorizedException("Not authorized to edit weblog: " + handle);
+                throw new AtomNotAuthorizedException(NOT_AUTHORIZED_TO_EDIT_WEBLOG + handle);
             }
             if (pathInfo.length > 1) {
                 try {                                        
@@ -233,13 +233,13 @@ public class MediaCollection {
             throw new AtomException("Incorrect path information");
         
         } catch (WebloggerException re) {
-            throw new AtomException("Posting media");
+            throw new AtomException(POSTING_MEDIA);
         }
     }
     
     
     public Feed getCollection(AtomRequest areq) throws AtomException {
-        log.debug("Entering");
+        log.debug(ENTERING);
         String[] rawPathInfo = StringUtils.split(areq.getPathInfo(),"/");
         try {
             int start = 0;
@@ -269,7 +269,7 @@ public class MediaCollection {
 
             Feed feed = new Feed();
             feed.setId(atomURL
-                +"/"+website.getHandle() + "/resources/" + path + start);                
+                +"/"+website.getHandle() + RESOURCES + path + start);                
             feed.setTitle(website.getName());
 
             Link link = new Link();
@@ -329,7 +329,7 @@ public class MediaCollection {
                     // add next link
                     int nextOffset = start + max;
                     String url = atomURL
-                        +"/"+ website.getHandle() + "/resources/" + path + nextOffset;
+                        +"/"+ website.getHandle() + RESOURCES + path + nextOffset;
                     Link nextLink = new Link();
                     nextLink.setRel("next");
                     nextLink.setHref(url);
@@ -339,7 +339,7 @@ public class MediaCollection {
                     // add previous link
                     int prevOffset = start > max ? start - max : 0;
                     String url = atomURL
-                        +"/"+website.getHandle() + "/resources/" + path + prevOffset;
+                        +"/"+website.getHandle() + RESOURCES + path + prevOffset;
                     Link prevLink = new Link();
                     prevLink.setRel("previous");
                     prevLink.setHref(url);
@@ -355,7 +355,7 @@ public class MediaCollection {
             }
             
 
-            log.debug("Exiting");
+            log.debug(EXITING);
             return feed;
        
         } catch (WebloggerException re) {
@@ -377,7 +377,7 @@ public class MediaCollection {
             WeblogManager wmgr = roller.getWeblogManager();
             Weblog website = wmgr.getWeblogByHandle(handle);
             if (!RollerAtomHandler.canEdit(user, website)) {
-                throw new AtomNotAuthorizedException("Not authorized to edit weblog: " + handle);
+                throw new AtomNotAuthorizedException(NOT_AUTHORIZED_TO_EDIT_WEBLOG + handle);
             }
             if (pathInfo.length > 1) {
                 // Save to temp file
@@ -404,7 +404,7 @@ public class MediaCollection {
 
                     fis.close();
                     
-                    log.debug("Exiting");
+                    log.debug(EXITING);
                     return;
 
                 } catch (FileIOException fie) {
@@ -422,9 +422,9 @@ public class MediaCollection {
             throw new AtomException("Incorrect path information");
         
         } catch (WebloggerException re) {
-            throw new AtomException("Posting media");
+            throw new AtomException(POSTING_MEDIA);
         } catch (IOException ioe) {
-            throw new AtomException("Posting media", ioe);
+            throw new AtomException(POSTING_MEDIA, ioe);
         }
     }
     
@@ -440,7 +440,7 @@ public class MediaCollection {
             if (RollerAtomHandler.canEdit(user, website) && pathInfo.length > 1) {
                 try {
                     String path = filePathFromPathInfo(pathInfo);
-                    String fileName = path.substring(0, path.length() - ".media-link".length());
+                    String fileName = path.substring(0, path.length() - MEDIA_LINK.length());
                     MediaFileManager fmgr = roller.getMediaFileManager();
                     MediaFile mf = fmgr.getMediaFileByPath(website, path);
                     fmgr.removeMediaFile(website, mf);
@@ -486,7 +486,7 @@ public class MediaCollection {
                 : file.getPath() + "/" + file.getName();
         String editURI = 
                 atomURL+"/"+website.getHandle()
-                + "/resource/" + filePath + ".media-link";
+                + "/resource/" + filePath + MEDIA_LINK;
         String editMediaURI = 
                 atomURL+"/"+ website.getHandle()
                 + "/resource/" + filePath;
@@ -606,4 +606,16 @@ public class MediaCollection {
         
         return fileName;
     }
+    
+    private static final String ENTERING = "Entering";
+    
+    private static final String NOT_AUTHORIZED_TO_EDIT_WEBLOG = "Not authorized to edit weblog: ";
+    
+    private static final String EXITING = "Exiting";
+    
+    private static final String POSTING_MEDIA = "Posting media";
+    
+    private static final String MEDIA_LINK = ".media-link";
+    
+    private static final String RESOURCES = "/resources/";
 }

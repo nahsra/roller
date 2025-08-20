@@ -47,7 +47,7 @@ public class FetcherException extends RollerException {
         // a more detailed exception from whatever fetching solution is used
         System.out.println(super.getMessage());
         if (getRootCause() != null) {
-            System.out.println("--- ROOT CAUSE ---");
+            System.out.println(ROOT_CAUSE);
             getRootCause().printStackTrace();
         }
     }
@@ -63,7 +63,7 @@ public class FetcherException extends RollerException {
         // a more detailed exception from whatever fetching solution is used
         s.println(super.getMessage());
         if (getRootCause() != null) {
-            s.println("--- ROOT CAUSE ---");
+            s.println(ROOT_CAUSE);
             getRootCause().printStackTrace(s);
         }
     }
@@ -79,9 +79,11 @@ public class FetcherException extends RollerException {
         // a more detailed exception from whatever fetching solution is used
         s.println(super.getMessage());
         if (getRootCause() != null) {
-            s.println("--- ROOT CAUSE ---");
+            s.println(ROOT_CAUSE);
             getRootCause().printStackTrace(s);
         }
     }
     
+    private static final String ROOT_CAUSE = "--- ROOT CAUSE ---";
+
 }

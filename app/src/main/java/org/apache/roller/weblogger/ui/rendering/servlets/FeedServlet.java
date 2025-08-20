@@ -223,11 +223,11 @@ public class FeedServlet extends HttpServlet {
             // determine what template to render with
             boolean siteWide = WebloggerRuntimeConfig.isSiteWideWeblog(weblog
                     .getHandle());
-            if (siteWide && "entries".equals(feedRequest.getType())
+            if (siteWide && ENTRIES.equals(feedRequest.getType())
                     && feedRequest.getTerm() != null) {
                 pageId = "site-search-atom.vm";
 
-            } else if ("entries".equals(feedRequest.getType())
+            } else if (ENTRIES.equals(feedRequest.getType())
                     && feedRequest.getTerm() != null) {
                 pageId = "feeds/weblog-search-atom.vm";
 
@@ -262,7 +262,7 @@ public class FeedServlet extends HttpServlet {
             }
 
             // Load search models if search feed
-            if ("entries".equals(feedRequest.getType())
+            if (ENTRIES.equals(feedRequest.getType())
                     && feedRequest.getTerm() != null) {
                 ModelLoader.loadModels(SearchResultsFeedModel.class.getName(),
                         model, initData, true);
@@ -341,5 +341,7 @@ public class FeedServlet extends HttpServlet {
 
         log.debug("Exiting");
     }
+    
+    private static final String ENTRIES = "entries";
 
 }

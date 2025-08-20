@@ -42,14 +42,14 @@ public class MathCommentAuthenticator implements CommentAuthenticator {
         int answer = 0;
 
         HttpSession session = request.getSession(true);
-        if (session.getAttribute("mathAnswer") == null) {
+        if (session.getAttribute(MATHANSWER) == null) {
             // starting a new test
             int value1 = this.ran.nextInt(10);
             int value2 = this.ran.nextInt(100);
             int sum = value1 + value2;
-            session.setAttribute("mathValue1", value1);
-            session.setAttribute("mathValue2", value2);
-            session.setAttribute("mathAnswer", sum);
+            session.setAttribute(MATHVALUE1, value1);
+            session.setAttribute(MATHVALUE2, value2);
+            session.setAttribute(MATHANSWER, sum);
         } else {
             // preserve user's answer
             String answerString = request.getParameter("answer");
@@ -59,8 +59,8 @@ public class MathCommentAuthenticator implements CommentAuthenticator {
         }
 
         // pull existing values out of session
-        Integer value1o = (Integer)session.getAttribute("mathValue1");
-        Integer value2o = (Integer)session.getAttribute("mathValue2");
+        Integer value1o = (Integer)session.getAttribute(MATHVALUE1);
+        Integer value2o = (Integer)session.getAttribute(MATHVALUE2);
 
         Locale locale = CommentAuthenticatorUtils.getLocale(request);
         I18nMessages messages = I18nMessages.getMessages(locale);
@@ -92,13 +92,13 @@ public class MathCommentAuthenticator implements CommentAuthenticator {
         if (answerString != null && session != null) {
             try {
                 int answer = Integer.parseInt(answerString);
-                Integer sum = (Integer) session.getAttribute("mathAnswer");
+                Integer sum = (Integer) session.getAttribute(MATHANSWER);
 
                 if (sum != null && answer == sum) {
                     authentic = true;
-                    session.removeAttribute("mathAnswer");
-                    session.removeAttribute("mathValue1");
-                    session.removeAttribute("mathValue2");
+                    session.removeAttribute(MATHANSWER);
+                    session.removeAttribute(MATHVALUE1);
+                    session.removeAttribute(MATHVALUE2);
                 }
             } catch (NumberFormatException ignored) {
                 // ignored ... someone is just really bad at math
@@ -110,6 +110,12 @@ public class MathCommentAuthenticator implements CommentAuthenticator {
 
         return authentic;
     }
+    
+    private static final String MATHVALUE1 = "mathValue1";
+    
+    private static final String MATHVALUE2 = "mathValue2";
+    
+    private static final String MATHANSWER = "mathAnswer";
 
 }
 

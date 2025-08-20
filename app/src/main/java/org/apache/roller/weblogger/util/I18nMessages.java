@@ -121,7 +121,7 @@ public final class I18nMessages {
             return bundle.getString(key);
         } catch (Exception e) {
             // send a warning in the logs
-            LOG.warn("Error getting key " + key);
+            LOG.warn(ERROR_GETTING_KEY + key);
             return key;
         }
     }
@@ -138,7 +138,7 @@ public final class I18nMessages {
             return MessageFormat.format(msg, args.toArray());
         } catch (Exception e) {
             // send a warning in the logs
-            LOG.warn("Error getting key " + key, e);
+            LOG.warn(ERROR_GETTING_KEY + key, e);
             return key;
         }
     }
@@ -155,7 +155,7 @@ public final class I18nMessages {
             return MessageFormat.format(msg, args);
         } catch (Exception e) {
             // send a warning in the logs
-            LOG.warn("Error getting key " + key, e);
+            LOG.warn(ERROR_GETTING_KEY + key, e);
             return key;
         }
     }
@@ -230,4 +230,6 @@ public final class I18nMessages {
 		}
 
 	}
+	
+	private static final String ERROR_GETTING_KEY = "Error getting key ";
 }

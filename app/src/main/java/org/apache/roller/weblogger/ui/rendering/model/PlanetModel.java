@@ -234,16 +234,18 @@ public class PlanetModel implements Model {
     
     
     public String getWebloggerURL() {
-        return planetUrlStrategy.getPlanetURL("ignored");
+        return planetUrlStrategy.getPlanetURL(IGNORED);
     }
 
     
     public String getWebloggerGroupURL(String group, int pageNum) {
-        return planetUrlStrategy.getPlanetGroupURL("ignored", group, pageNum);
+        return planetUrlStrategy.getPlanetGroupURL(IGNORED, group, pageNum);
     }
     
     
     public String getWebloggerFeedURL(String group, String format) {
-        return planetUrlStrategy.getPlanetGroupFeedURL("ignored", group, format);
+        return planetUrlStrategy.getPlanetGroupFeedURL(IGNORED, group, format);
     }
+    
+    private static final String IGNORED = "ignored";
 }

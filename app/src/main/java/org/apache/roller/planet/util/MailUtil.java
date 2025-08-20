@@ -160,7 +160,7 @@ public class MailUtil extends Object {
             String content
     )
             throws MessagingException {
-        sendMessage(session, from, to, cc, bcc, subject, content, "text/plain; charset=utf-8");
+        sendMessage(session, from, to, cc, bcc, subject, content, TEXT_PLAIN_CHARSET_UTF_8);
     }
 
     /**
@@ -189,7 +189,7 @@ public class MailUtil extends Object {
             recipient = new String[]{to};
         }
 
-        sendMessage(session, from, recipient, cc, bcc, subject, content, "text/plain; charset=utf-8");
+        sendMessage(session, from, recipient, cc, bcc, subject, content, TEXT_PLAIN_CHARSET_UTF_8);
     }
 
     /**
@@ -229,7 +229,7 @@ public class MailUtil extends Object {
             bcopy = new String[]{bcc};
         }
 
-        sendMessage(session, from, recipient, copy, bcopy, subject, content, "text/plain; charset=utf-8");
+        sendMessage(session, from, recipient, copy, bcopy, subject, content, TEXT_PLAIN_CHARSET_UTF_8);
     }
 
     /**
@@ -252,7 +252,7 @@ public class MailUtil extends Object {
             String content
     )
             throws MessagingException {
-        sendMessage(session, from, to, cc, bcc, subject, content, "text/html; charset=utf-8");
+        sendMessage(session, from, to, cc, bcc, subject, content, TEXT_HTML_CHARSET_UTF_8);
     }
 
     /**
@@ -290,7 +290,7 @@ public class MailUtil extends Object {
             bcopy = new String[]{bcc};
         }
 
-        sendMessage(session, from, recipient, copy, bcopy, subject, content, "text/html; charset=utf-8");
+        sendMessage(session, from, recipient, copy, bcopy, subject, content, TEXT_HTML_CHARSET_UTF_8);
     }
 
     /**
@@ -320,7 +320,11 @@ public class MailUtil extends Object {
             recipient = new String[]{to};
         }
 
-        sendMessage(session, from, recipient, cc, bcc, subject, content, "text/html; charset=utf-8");
+        sendMessage(session, from, recipient, cc, bcc, subject, content, TEXT_HTML_CHARSET_UTF_8);
     }
+    
+    private static final String TEXT_PLAIN_CHARSET_UTF_8 = "text/plain; charset=utf-8";
+    
+    private static final String TEXT_HTML_CHARSET_UTF_8 = "text/html; charset=utf-8";
 }
 

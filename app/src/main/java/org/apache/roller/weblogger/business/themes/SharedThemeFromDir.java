@@ -260,7 +260,7 @@ public class SharedThemeFromDir extends SharedTheme {
             if (contents == null) {
                 // if we don't have any contents then skip this one
                 log.error("Couldn't load stylesheet theme [" + this.getName()
-                        + "] template file [" + templateFile + "]");
+                        + TEMPLATE_FILE + templateFile + "]");
             } else {
 
                 // construct ThemeTemplate representing this file
@@ -359,7 +359,7 @@ public class SharedThemeFromDir extends SharedTheme {
             if (contents == null) {
                 // if we don't have any contents then skip this one
                 throw new ThemeInitializationException("Couldn't load theme ["
-                        + this.getName() + "] template file [" + templateFile
+                        + this.getName() + TEMPLATE_FILE + templateFile
                         + "]");
             }
 
@@ -413,7 +413,7 @@ public class SharedThemeFromDir extends SharedTheme {
             length = reader.read(chars);
         } catch (Exception noprob) {
             log.error("Exception reading theme [" + this.getName()
-                    + "] template file [" + templateFile + "]");
+                    + TEMPLATE_FILE + templateFile + "]");
             if (log.isDebugEnabled()) {
                 log.debug(noprob);
             }
@@ -457,7 +457,7 @@ public class SharedThemeFromDir extends SharedTheme {
             // if we don't have any contents then load no string
             contents = "";
             log.error("Couldn't load stylesheet theme [" + this.getName()
-                    + "] template file [" + templateFile + "]");
+                    + TEMPLATE_FILE + templateFile + "]");
         }
         //TODO: remove templateId above
         templateRendition.setTemplate(contents);
@@ -467,5 +467,7 @@ public class SharedThemeFromDir extends SharedTheme {
 
         return templateRendition;
     }
+    
+    private static final String TEMPLATE_FILE = "] template file [";
 
 }

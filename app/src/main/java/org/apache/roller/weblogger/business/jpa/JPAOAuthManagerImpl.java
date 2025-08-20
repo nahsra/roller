@@ -283,7 +283,7 @@ public class JPAOAuthManagerImpl implements OAuthManager {
                 record.getConsumerSecret(),
                 getServiceProvider());
             if (record.getUserName() != null) {
-                consumer.setProperty("userId", record.getUserName());
+                consumer.setProperty(USERID, record.getUserName());
             }
         }
         return consumer;
@@ -298,10 +298,10 @@ public class JPAOAuthManagerImpl implements OAuthManager {
             accessor.requestToken = record.getRequestToken();
             accessor.tokenSecret = record.getTokenSecret();
             if (record.getAuthorized() != null) {
-                accessor.setProperty("authorized", record.getAuthorized());
+                accessor.setProperty(AUTHORIZED, record.getAuthorized());
             }
             if (record.getUserName() != null) {
-                accessor.setProperty("userId", record.getUserName());
+                accessor.setProperty(USERID, record.getUserName());
             }
         }
         return accessor;
@@ -328,8 +328,8 @@ public class JPAOAuthManagerImpl implements OAuthManager {
         record.setRequestToken(accessor.requestToken);
         record.setAccessToken(accessor.accessToken);
         record.setTokenSecret(accessor.tokenSecret);
-        if (accessor.getProperty("userId") != null) {
-            record.setUserName((String)accessor.getProperty("userId"));
+        if (accessor.getProperty(USERID) != null) {
+            record.setUserName((String)accessor.getProperty(USERID));
         }
 
         if (record.getCreated() != null) {
@@ -344,8 +344,8 @@ public class JPAOAuthManagerImpl implements OAuthManager {
             record.setUpdated(record.getCreated());
         }
 
-        if (accessor.getProperty("authorized") != null) {
-            record.setAuthorized((Boolean)accessor.getProperty("authorized"));
+        if (accessor.getProperty(AUTHORIZED) != null) {
+            record.setAuthorized((Boolean)accessor.getProperty(AUTHORIZED));
         }
         try {
             strategy.store(record);
@@ -397,4 +397,8 @@ public class JPAOAuthManagerImpl implements OAuthManager {
             throw new OAuthException("ERROR removing accessor", ex);
         }
     }
+    
+    private static final String USERID = "userId";
+    
+    private static final String AUTHORIZED = "authorized";
 }

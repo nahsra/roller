@@ -99,11 +99,11 @@ public class MediaFileEdit extends MediaFileBase {
             this.bean.copyFrom(mediaFile);
 
         } catch (FileIOException ex) {
-            addError("uploadFiles.error.upload", bean.getName());
+            addError(UPLOADFILES_ERROR_UPLOAD, bean.getName());
 
         } catch (Exception e) {
             log.error("Error uploading file " + bean.getName(), e);
-            addError("uploadFiles.error.upload", bean.getName());
+            addError(UPLOADFILES_ERROR_UPLOAD, bean.getName());
         }
 
         return INPUT;
@@ -146,11 +146,11 @@ public class MediaFileEdit extends MediaFileBase {
                 return SUCCESS;
 
             } catch (FileIOException ex) {
-                addError("uploadFiles.error.upload", bean.getName());
+                addError(UPLOADFILES_ERROR_UPLOAD, bean.getName());
 
             } catch (Exception e) {
                 log.error("Error uploading file " + bean.getName(), e);
-                addError("uploadFiles.error.upload", bean.getName());
+                addError(UPLOADFILES_ERROR_UPLOAD, bean.getName());
             }
 
         }
@@ -217,4 +217,6 @@ public class MediaFileEdit extends MediaFileBase {
     public void setUploadedFileName(String uploadedFileName) {
         this.uploadedFileName = uploadedFileName;
     }
+    
+    private static final String UPLOADFILES_ERROR_UPLOAD = "uploadFiles.error.upload";
 }

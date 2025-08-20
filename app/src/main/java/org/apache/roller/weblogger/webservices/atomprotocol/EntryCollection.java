@@ -84,7 +84,7 @@ public class EntryCollection {
     
     
     public Entry postEntry(AtomRequest areq, Entry entry) throws AtomException {
-        log.debug("Entering");
+        log.debug(ENTERING);
         String[] pathInfo = StringUtils.split(areq.getPathInfo(),"/");
         try {
             // authenticated client posted a weblog entry
@@ -120,7 +120,7 @@ public class EntryCollection {
             for (Object objLink : newEntry.getOtherLinks()) {
                 Link link = (Link) objLink;
                 if ("edit".equals(link.getRel())) {
-                    log.debug("Exiting");
+                    log.debug(EXITING);
                     return createAtomEntry(rollerEntry);
                 }
             }
@@ -139,7 +139,7 @@ public class EntryCollection {
             String entryid = Utilities.stringToStringArray(areq.getPathInfo(),"/")[2];
             WeblogEntry entry = roller.getWeblogEntryManager().getWeblogEntry(entryid);
             if (entry == null) {
-                throw new AtomNotFoundException("Cannot find specified entry/resource");
+                throw new AtomNotFoundException(CANNOT_FIND_SPECIFIED_ENTRY_RESOURCE);
             }
             if (!RollerAtomHandler.canView(user, entry)) {
                 throw new AtomNotAuthorizedException("Not authorized to view entry");
@@ -153,7 +153,7 @@ public class EntryCollection {
     
     
     public Feed getCollection(AtomRequest areq) throws AtomException {
-        log.debug("Entering");
+        log.debug(ENTERING);
         String[] pathInfo = StringUtils.split(areq.getPathInfo(),"/");
         try {
             int start = 0;
@@ -183,7 +183,7 @@ public class EntryCollection {
             List<WeblogEntry> entries = roller.getWeblogEntryManager().getWeblogEntries(wesc);
             Feed feed = new Feed();
             feed.setId(atomURL
-                +"/"+website.getHandle() + "/entries/" + start);
+                +"/"+website.getHandle() + ENTRIES + start);
             feed.setTitle(website.getName());
 
             Link link = new Link();
@@ -210,7 +210,7 @@ public class EntryCollection {
                 // add next link
                 int nextOffset = start + max;
                 String url = atomURL+"/"
-                        + website.getHandle() + "/entries/" + nextOffset;
+                        + website.getHandle() + ENTRIES + nextOffset;
                 Link nextLink = new Link();
                 nextLink.setRel("next");
                 nextLink.setHref(url);
@@ -220,7 +220,7 @@ public class EntryCollection {
                 // add previous link
                 int prevOffset = start > max ? start - max : 0;
                 String url = atomURL+"/"
-                        +website.getHandle() + "/entries/" + prevOffset;
+                        +website.getHandle() + ENTRIES + prevOffset;
                 Link prevLink = new Link();
                 prevLink.setRel("previous");
                 prevLink.setHref(url);
@@ -232,7 +232,7 @@ public class EntryCollection {
             // Use collection URI as id
             feed.setEntries(atomEntries);
             
-            log.debug("Exiting");
+            log.debug(EXITING);
             return feed;
         
         } catch (WebloggerException re) {
@@ -242,7 +242,7 @@ public class EntryCollection {
     
     
     public void putEntry(AtomRequest areq, Entry entry) throws AtomException {
-        log.debug("Entering");
+        log.debug(ENTERING);
         String[] pathInfo = StringUtils.split(areq.getPathInfo(),"/");
         try {
             if (pathInfo.length == 3)
@@ -252,7 +252,7 @@ public class EntryCollection {
                     roller.getWeblogEntryManager().getWeblogEntry(pathInfo[2]);
                 if (rollerEntry == null) {
                     throw new AtomNotFoundException(
-                        "Cannot find specified entry/resource");  
+                        CANNOT_FIND_SPECIFIED_ENTRY_RESOURCE);  
                 }
                 if (RollerAtomHandler.canEdit(user, rollerEntry)) {
             
@@ -268,12 +268,12 @@ public class EntryCollection {
                     if (rollerEntry.isPublished()) {
                         roller.getIndexManager().addEntryReIndexOperation(rollerEntry);
                     }
-                    log.debug("Exiting");
+                    log.debug(EXITING);
                     return;
                 }
                 throw new AtomNotAuthorizedException("ERROR not authorized to update entry");
             }
-            throw new AtomNotFoundException("Cannot find specified entry/resource");
+            throw new AtomNotFoundException(CANNOT_FIND_SPECIFIED_ENTRY_RESOURCE);
             
         } catch (WebloggerException re) {
             throw new AtomException("Updating entry");
@@ -471,4 +471,12 @@ public class EntryCollection {
             manager.addEntryReIndexOperation(entry);
         }
     }
+    
+    private static final String ENTERING = "Entering";
+    
+    private static final String EXITING = "Exiting";
+    
+    private static final String CANNOT_FIND_SPECIFIED_ENTRY_RESOURCE = "Cannot find specified entry/resource";
+    
+    private static final String ENTRIES = "/entries/";
 }

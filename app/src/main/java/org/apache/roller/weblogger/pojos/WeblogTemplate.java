@@ -40,7 +40,7 @@ public class WeblogTemplate implements ThemeTemplate, Serializable {
     public static final long serialVersionUID = -613737191638263428L;
     public static final String DEFAULT_PAGE = "Weblog";
     
-    private static final Set<String> requiredTemplates = Set.of("Weblog", "_day");
+    private static final Set<String> requiredTemplates = Set.of(DEFAULT_PAGE, "_day");
     
     // attributes
     private String id = UUIDGenerator.generateUUID();
@@ -167,7 +167,7 @@ public class WeblogTemplate implements ThemeTemplate, Serializable {
         * eventually, the required flag should probably be stored in the db
         * and possibly applicable to any template.
         */
-        return (requiredTemplates.contains(getName()) || "Weblog".equals(getLink()));
+        return (requiredTemplates.contains(getName()) || DEFAULT_PAGE.equals(getLink()));
     }
 
     /**

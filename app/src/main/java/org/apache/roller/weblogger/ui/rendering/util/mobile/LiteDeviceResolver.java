@@ -78,11 +78,11 @@ public class LiteDeviceResolver implements DeviceResolver {
 		if (userAgent != null) {
 			userAgent = userAgent.toLowerCase();
 			// Android special case
-			if (userAgent.contains("android") && !userAgent.contains("mobile")) {
+			if (userAgent.contains("android") && !userAgent.contains(MOBILE)) {
 				return LiteDevice.TABLET_INSTANCE;
 			}
 			// Kindle Fire special case
-			if (userAgent.contains("silk") && !userAgent.contains("mobile")) {
+			if (userAgent.contains("silk") && !userAgent.contains(MOBILE)) {
 				return LiteDevice.TABLET_INSTANCE;
 			}
 			for (String keyword : tabletUserAgentKeywords) {
@@ -202,10 +202,12 @@ public class LiteDeviceResolver implements DeviceResolver {
 			"wapi", "wapp", "wapr", "webc", "winw", "winw", "xda ", "xda-" };
 	private static final String[] KNOWN_MOBILE_USER_AGENT_KEYWORDS = new String[] {
 			"blackberry", "webos", "ipod", "lge vx", "midp", "maemo", "mmp",
-			"mobile", "netfront", "hiptop", "nintendo DS", "novarra",
+			MOBILE, "netfront", "hiptop", "nintendo DS", "novarra",
 			"openweb", "opera mobi", "opera mini", "palm", "psp", "phone",
 			"smartphone", "symbian", "up.browser", "up.link", "wap",
 			"windows ce" };
 	private static final String[] KNOWN_TABLET_USER_AGENT_KEYWORDS = new String[] {
 			"ipad", "playbook", "hp-tablet", "kindle" };
+	
+	private static final String MOBILE = "mobile";
 }

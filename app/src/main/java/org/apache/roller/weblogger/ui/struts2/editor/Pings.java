@@ -171,7 +171,7 @@ public class Pings extends UIAction {
                             addError("ping.transmittedButError");
                             addError(pingResult.getMessage());
                         } else {
-                            addError("ping.transmissionFailed");
+                            addError(PING_TRANSMISSIONFAILED);
                         }
                     } else {
                         addMessage("ping.successful");
@@ -179,11 +179,11 @@ public class Pings extends UIAction {
                 }
             } catch (IOException ex) {
                 log.debug(ex);
-                addError("ping.transmissionFailed");
+                addError(PING_TRANSMISSIONFAILED);
                 addSpecificMessages(ex);
             } catch (XmlRpcException ex) {
                 log.debug(ex);
-                addError("ping.transmissionFailed");
+                addError(PING_TRANSMISSIONFAILED);
                 addSpecificMessages(ex);
             }
         }
@@ -269,4 +269,6 @@ public class Pings extends UIAction {
     public void setPingStatus(Map<String, Boolean> pingStatus) {
         this.pingStatus = pingStatus;
     }
+    
+    private static final String PING_TRANSMISSIONFAILED = "ping.transmissionFailed";
 }

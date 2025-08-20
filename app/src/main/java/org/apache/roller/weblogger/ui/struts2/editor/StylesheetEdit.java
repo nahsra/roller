@@ -180,7 +180,7 @@ public class StylesheetEdit extends UIAction {
         } catch (WebloggerException ex) {
             log.error("Error finding/adding stylesheet template from weblog - "
                 + getActionWeblog().getHandle(), ex);
-            addError("generic.error.check.logs");
+            addError(GENERIC_ERROR_CHECK_LOGS);
         }
 
         return revert();
@@ -292,7 +292,7 @@ public class StylesheetEdit extends UIAction {
 
             } catch (WebloggerException ex) {
                 log.error("Error updating stylesheet template for weblog - " + getActionWeblog().getHandle(), ex);
-                addError("generic.error.check.logs");
+                addError(GENERIC_ERROR_CHECK_LOGS);
             }
         }
         return execute();
@@ -328,7 +328,7 @@ public class StylesheetEdit extends UIAction {
 
             } catch (Exception e) {
                 log.error("Error deleting stylesheet template for weblog - " + getActionWeblog().getHandle(), e);
-                addError("generic.error.check.logs");
+                addError(GENERIC_ERROR_CHECK_LOGS);
             }
         }
         return INPUT;
@@ -401,4 +401,6 @@ public class StylesheetEdit extends UIAction {
     public void setContentsMobile(String contents) {
         this.contentsMobile = contents;
     }
+    
+    private static final String GENERIC_ERROR_CHECK_LOGS = "generic.error.check.logs";
 }

@@ -140,8 +140,8 @@ public class GlobalConfig extends UIAction implements HttpParametersAware, Servl
     public String execute() {
 
         // setup array of configured plugins
-        if (!StringUtils.isEmpty(WebloggerRuntimeConfig.getProperty("users.comments.plugins"))) {
-            setCommentPlugins(StringUtils.split(WebloggerRuntimeConfig.getProperty("users.comments.plugins"), ","));
+        if (!StringUtils.isEmpty(WebloggerRuntimeConfig.getProperty(USERS_COMMENTS_PLUGINS))) {
+            setCommentPlugins(StringUtils.split(WebloggerRuntimeConfig.getProperty(USERS_COMMENTS_PLUGINS), ","));
         }
 
         return SUCCESS;
@@ -213,7 +213,7 @@ public class GlobalConfig extends UIAction implements HttpParametersAware, Servl
                 updProp.setValue( incomingProp.trim() );
                 log.debug("Set something " + propName + " = " + incomingProp);
 
-            } else if ( propertyDef.getName().equals("users.comments.plugins") ) {
+            } else if ( propertyDef.getName().equals(USERS_COMMENTS_PLUGINS) ) {
                 // not a problem
 
             } else {
@@ -231,7 +231,7 @@ public class GlobalConfig extends UIAction implements HttpParametersAware, Servl
         if (getCommentPlugins().length > 0) {
             enabledPlugins = StringUtils.join(getCommentPlugins(), ",");
         }
-        RuntimeConfigProperty prop = getProperties().get("users.comments.plugins");
+        RuntimeConfigProperty prop = getProperties().get(USERS_COMMENTS_PLUGINS);
         prop.setValue(enabledPlugins);
 
         try {
@@ -318,4 +318,6 @@ public class GlobalConfig extends UIAction implements HttpParametersAware, Servl
     public void setWeblogs(Collection<Weblog> weblogs) {
         this.weblogs = weblogs;
     }
+    
+    private static final String USERS_COMMENTS_PLUGINS = "users.comments.plugins";
 }

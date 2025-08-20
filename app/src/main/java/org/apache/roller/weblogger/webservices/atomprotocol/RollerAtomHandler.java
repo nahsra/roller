@@ -237,10 +237,10 @@ public class RollerAtomHandler implements AtomHandler {
         String[] pathInfo = StringUtils.split(areq.getPathInfo(),"/");
         // URI is /blogname/entries/entryid
         if (pathInfo.length > 2) {
-            if (pathInfo[1].equals("entry")) {
+            if (pathInfo[1].equals(ENTRY)) {
                 EntryCollection ecol = new EntryCollection(user, atomURL);
                 return ecol.getEntry(areq);
-            } else if (pathInfo[1].equals("resource") && pathInfo[pathInfo.length - 1].endsWith(".media-link")) {
+            } else if (pathInfo[1].equals(RESOURCE) && pathInfo[pathInfo.length - 1].endsWith(".media-link")) {
                 MediaCollection mcol = new MediaCollection(user, atomURL);
                 return mcol.getEntry(areq);
             }
@@ -292,11 +292,11 @@ public class RollerAtomHandler implements AtomHandler {
         String[] pathInfo = StringUtils.split(areq.getPathInfo(),"/");
         if (pathInfo.length > 2) {
             // URI is /blogname/entry/entryid
-            if (pathInfo[1].equals("entry")) {
+            if (pathInfo[1].equals(ENTRY)) {
                 EntryCollection ecol = new EntryCollection(user, atomURL);
                 ecol.deleteEntry(areq);
                 return;
-            } else if (pathInfo[1].equals("resource")) {
+            } else if (pathInfo[1].equals(RESOURCE)) {
                 MediaCollection mcol = new MediaCollection(user, atomURL);
                 mcol.deleteEntry(areq);
                 return;
@@ -323,10 +323,10 @@ public class RollerAtomHandler implements AtomHandler {
     @Override
     public boolean isEntryURI(AtomRequest areq) {
         String[] pathInfo = StringUtils.split(areq.getPathInfo(),"/");
-        if (pathInfo.length > 2 && pathInfo[1].equals("entry")) {
+        if (pathInfo.length > 2 && pathInfo[1].equals(ENTRY)) {
             return true;
         }
-        if (pathInfo.length > 2 && pathInfo[1].equals("resource") && pathInfo[pathInfo.length-1].endsWith(".media-link")) {
+        if (pathInfo.length > 2 && pathInfo[1].equals(RESOURCE) && pathInfo[pathInfo.length-1].endsWith(".media-link")) {
             return true;
         }
         return false;
@@ -338,7 +338,7 @@ public class RollerAtomHandler implements AtomHandler {
     @Override
     public boolean isMediaEditURI(AtomRequest areq) {
         String[] pathInfo = StringUtils.split(areq.getPathInfo(),"/");
-        if (pathInfo.length > 1 && pathInfo[1].equals("resource")) {
+        if (pathInfo.length > 1 && pathInfo[1].equals(RESOURCE)) {
             return true;
         }
         return false;
@@ -528,5 +528,9 @@ public class RollerAtomHandler implements AtomHandler {
             } catch (Exception ignored) {}
         }
     }
+    
+    private static final String ENTRY = "entry";
+    
+    private static final String RESOURCE = "resource";
 
 }

@@ -175,7 +175,7 @@ public class FeedModel implements Model {
                 params.put("cat", URLUtilities.encode(category));
             }  
             if(feedRequest.isExcerpts()) {
-                params.put("excerpts", "true");
+                params.put(EXCERPTS, "true");
             }            
             return super.createURL(url, params);
         }
@@ -184,6 +184,8 @@ public class FeedModel implements Model {
         public String getUrl() {
             return createURL(super.getUrl(), new HashMap<>());
         }
+        
+        private static final String EXCERPTS = "excerpts";
     }
     
     public class FeedCommentsPager extends CommentsPager {
@@ -209,7 +211,7 @@ public class FeedModel implements Model {
                 params.put("cat", URLUtilities.encode(category));
             }  
             if(feedRequest.isExcerpts()) {
-                params.put("excerpts", "true");
+                params.put(EXCERPTS, "true");
             }   
             return super.createURL(url, params);
         }
@@ -243,7 +245,7 @@ public class FeedModel implements Model {
                 params.put("cat", URLUtilities.encode(category));
             }  
             if(feedRequest.isExcerpts()) {
-                params.put("excerpts", "true");
+                params.put(EXCERPTS, "true");
             }   
             return super.createURL(url, params);
         }

@@ -431,7 +431,7 @@ public class JPAWeblogManagerImpl implements WeblogManager {
         if (startDate != null) {
             Timestamp start = new Timestamp(startDate.getTime());
             if (whereClause.length() > 0) {
-                whereClause.append(" AND ");
+                whereClause.append(AND);
             }
             params.add(size++, start);
             whereClause.append(" w.dateCreated > ?").append(size);
@@ -439,21 +439,21 @@ public class JPAWeblogManagerImpl implements WeblogManager {
         if (endDate != null) {
             Timestamp end = new Timestamp(endDate.getTime());
             if (whereClause.length() > 0) {
-                whereClause.append(" AND ");
+                whereClause.append(AND);
             }
             params.add(size++, end);
             whereClause.append(" w.dateCreated < ?").append(size);
         }
         if (enabled != null) {
             if (whereClause.length() > 0) {
-                whereClause.append(" AND ");
+                whereClause.append(AND);
             }
             params.add(size++, enabled);
             whereClause.append(" w.visible = ?").append(size);
         }
         if (active != null) {
             if (whereClause.length() > 0) {
-                whereClause.append(" AND ");
+                whereClause.append(AND);
             }
             params.add(size++, active);
             whereClause.append(" w.active = ?").append(size);
@@ -552,7 +552,7 @@ public class JPAWeblogManagerImpl implements WeblogManager {
             throws WebloggerException {
         
         if (weblog == null) {
-            throw new WebloggerException("weblog is null");
+            throw new WebloggerException(WEBLOG_IS_NULL);
         }
 
         if (action == null) {
@@ -578,7 +578,7 @@ public class JPAWeblogManagerImpl implements WeblogManager {
     throws WebloggerException {
         
         if (weblog == null) {
-            throw new WebloggerException("weblog is null");
+            throw new WebloggerException(WEBLOG_IS_NULL);
         }
         
         if (templateName == null) {
@@ -602,7 +602,7 @@ public class JPAWeblogManagerImpl implements WeblogManager {
     @Override
     public List<WeblogTemplate> getTemplates(Weblog weblog) throws WebloggerException {
         if (weblog == null) {
-            throw new WebloggerException("weblog is null");
+            throw new WebloggerException(WEBLOG_IS_NULL);
         }
         TypedQuery<WeblogTemplate> q = strategy.getNamedQuery(
                 "WeblogTemplate.getByWeblogOrderByName", WeblogTemplate.class);
@@ -719,5 +719,9 @@ public class JPAWeblogManagerImpl implements WeblogManager {
         }
         return true;
     }
+    
+    private static final String WEBLOG_IS_NULL = "weblog is null";
+    
+    private static final String AND = " AND ";
 
 }

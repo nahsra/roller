@@ -59,7 +59,7 @@ public class ThemeMetadataParser {
         Element root = doc.getRootElement();
         theme.setId(root.getChildText("id"));
         theme.setName(root.getChildText("name"));
-        theme.setDescription(root.getChildText("description"));
+        theme.setDescription(root.getChildText(DESCRIPTION));
         theme.setAuthor(root.getChildText("author"));
 
         // dual-theme (standard & mobile) or one-theme-fits-all?
@@ -120,7 +120,7 @@ public class ThemeMetadataParser {
 		ThemeMetadataTemplate template = new ThemeMetadataTemplate();
 
 		template.setName(element.getChildText("name"));
-		template.setDescription(element.getChildText("description"));
+		template.setDescription(element.getChildText(DESCRIPTION));
 		template.setLink(element.getChildText("link"));
 		template.setContentType(element.getChildText("contentType"));
         String actionString = element.getAttributeValue("action");
@@ -192,7 +192,7 @@ public class ThemeMetadataParser {
         ThemeMetadataTemplate template = new ThemeMetadataTemplate();
         
         template.setName(element.getChildText("name"));
-        template.setDescription(element.getChildText("description"));
+        template.setDescription(element.getChildText(DESCRIPTION));
         template.setLink(element.getChildText("link"));
         template.setContentType(element.getChildText("contentType"));
         template.setAction(ComponentType.STYLESHEET);
@@ -240,4 +240,6 @@ public class ThemeMetadataParser {
         return template;
     }
     
+    private static final String DESCRIPTION = "description";
+
 }

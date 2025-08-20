@@ -121,7 +121,7 @@ public final class EntryEdit extends UIAction {
     @SkipValidation
     @Override
     public String execute() {
-        if (getActionName().equals("entryEdit")) {
+        if (getActionName().equals(ENTRYEDIT)) {
             // load bean with pojo data
             getBean().copyFrom(getEntry(), getLocale());
         } else {
@@ -241,7 +241,7 @@ public final class EntryEdit extends UIAction {
                     } catch (MediacastException ex) {
                         addMessage(getText(ex.getErrorKey()));
                     }
-                } else if ("entryEdit".equals(actionName)) {
+                } else if (ENTRYEDIT.equals(actionName)) {
                     try {
                         // if MediaCast string is empty, clean out MediaCast
                         // attributes
@@ -271,7 +271,7 @@ public final class EntryEdit extends UIAction {
                 // notify search of the new entry
                 if (weblogEntry.isPublished()) {
                     indexMgr.addEntryReIndexOperation(entry);
-                } else if ("entryEdit".equals(actionName)) {
+                } else if (ENTRYEDIT.equals(actionName)) {
                     indexMgr.removeEntryIndexOperation(entry);
                 }
 
@@ -287,7 +287,7 @@ public final class EntryEdit extends UIAction {
                 if (weblogEntry.isPending() && MailUtil.isMailConfigured()) {
                     MailUtil.sendPendingEntryNotice(weblogEntry);
                 }
-                if ("entryEdit".equals(actionName)) {
+                if (ENTRYEDIT.equals(actionName)) {
                     addStatusMessage(getEntry().getStatus());
                     // continue in entryEdit mode
                     return INPUT;
@@ -521,5 +521,7 @@ public final class EntryEdit extends UIAction {
         }
         return entries;
     }
+    
+    private static final String ENTRYEDIT = "entryEdit";
 
 }

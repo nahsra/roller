@@ -113,7 +113,7 @@ public class MailUtil {
             String editURL = WebloggerFactory.getWeblogger().getUrlStrategy().getEntryEditURL(entry.getWebsite().getHandle(), entry.getId(), true);
             
             ResourceBundle resources = ResourceBundle.getBundle(
-                    "ApplicationResources", entry.getWebsite().getLocaleInstance());
+                    APPLICATIONRESOURCES, entry.getWebsite().getLocaleInstance());
             StringBuilder sb = new StringBuilder();
             sb.append(
                     MessageFormat.format(
@@ -165,7 +165,7 @@ public class MailUtil {
             String url = rootURL + "/roller-ui/menu.rol";
             
             ResourceBundle resources = ResourceBundle.getBundle(
-                    "ApplicationResources",
+                    APPLICATIONRESOURCES,
                     website.getLocaleInstance());
             StringBuilder sb = new StringBuilder();
             sb.append(MessageFormat.format(
@@ -210,7 +210,7 @@ public class MailUtil {
         
         try {
             ResourceBundle resources = ResourceBundle.getBundle(
-                    "ApplicationResources", I18nUtils.toLocale(user.getLocale()));
+                    APPLICATIONRESOURCES, I18nUtils.toLocale(user.getLocale()));
             
             String from = WebloggerRuntimeConfig.getProperty(
                     "user.account.activation.mail.from");
@@ -700,4 +700,6 @@ public class MailUtil {
             super(t);
         }
     }
+    
+    private static final String APPLICATIONRESOURCES = "ApplicationResources";
 }

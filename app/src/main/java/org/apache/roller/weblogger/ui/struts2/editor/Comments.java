@@ -123,8 +123,8 @@ public class Comments extends UIAction {
                         .size() - 1));
             }
         } catch (WebloggerException ex) {
-            log.error("Error looking up comments", ex);
-            addError("Error looking up comments");
+            log.error(ERROR_LOOKING_UP_COMMENTS, ex);
+            addError(ERROR_LOOKING_UP_COMMENTS);
         }
 
         // build comments pager
@@ -193,8 +193,8 @@ public class Comments extends UIAction {
             }
 
         } catch (WebloggerException ex) {
-            log.error("Error looking up comments", ex);
-            addError("Error looking up comments");
+            log.error(ERROR_LOOKING_UP_COMMENTS, ex);
+            addError(ERROR_LOOKING_UP_COMMENTS);
         }
 
         return LIST;
@@ -467,4 +467,6 @@ public class Comments extends UIAction {
     public void setQueryEntry(WeblogEntry queryEntry) {
         this.queryEntry = queryEntry;
     }
+    
+    private static final String ERROR_LOOKING_UP_COMMENTS = "Error looking up comments";
 }
