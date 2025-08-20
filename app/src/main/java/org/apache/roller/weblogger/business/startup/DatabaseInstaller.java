@@ -290,8 +290,8 @@ public class DatabaseInstaller {
                 messages.addAll(runner.getMessages());
             }
 
-            errorMessage("Problem upgrading database to version 400", ex);
-            throw new StartupException("Problem upgrading database to version 400", ex);
+            errorMessage(PROBLEM_UPGRADING_DATABASE_TO_VERSION_400, ex);
+            throw new StartupException(PROBLEM_UPGRADING_DATABASE_TO_VERSION_400, ex);
         }
 
 
@@ -351,8 +351,8 @@ public class DatabaseInstaller {
             successMessage("Done populating parentid columns.");
 
         } catch (Exception e) {
-            errorMessage("Problem upgrading database to version 320", e);
-            throw new StartupException("Problem upgrading database to version 320", e);
+            errorMessage(PROBLEM_UPGRADING_DATABASE_TO_VERSION_320, e);
+            throw new StartupException(PROBLEM_UPGRADING_DATABASE_TO_VERSION_320, e);
         }
 
 
@@ -502,8 +502,8 @@ public class DatabaseInstaller {
             successMessage("Done populating path columns.");
 
         } catch (SQLException e) {
-            log.error("Problem upgrading database to version 320", e);
-            throw new StartupException("Problem upgrading database to version 320", e);
+            log.error(PROBLEM_UPGRADING_DATABASE_TO_VERSION_320, e);
+            throw new StartupException(PROBLEM_UPGRADING_DATABASE_TO_VERSION_320, e);
         }
 
 
@@ -559,8 +559,8 @@ public class DatabaseInstaller {
             successMessage("Planet group 'external' merged into group 'all'.");
 
         } catch (Exception e) {
-            errorMessage("Problem upgrading database to version 400", e);
-            throw new StartupException("Problem upgrading database to version 400", e);
+            errorMessage(PROBLEM_UPGRADING_DATABASE_TO_VERSION_400, e);
+            throw new StartupException(PROBLEM_UPGRADING_DATABASE_TO_VERSION_400, e);
         }
 
 
@@ -608,8 +608,8 @@ public class DatabaseInstaller {
             successMessage("Comments successfully updated to use new comment plugins.");
 
         } catch (Exception e) {
-            errorMessage("Problem upgrading database to version 400", e);
-            throw new StartupException("Problem upgrading database to version 400", e);
+            errorMessage(PROBLEM_UPGRADING_DATABASE_TO_VERSION_400, e);
+            throw new StartupException(PROBLEM_UPGRADING_DATABASE_TO_VERSION_400, e);
         }
 
 
@@ -700,8 +700,8 @@ public class DatabaseInstaller {
             successMessage("Comments successfully updated to use new comment plugins.");
 
         } catch (Exception e) {
-            errorMessage("Problem upgrading database to version 400", e);
-            throw new StartupException("Problem upgrading database to version 400", e);
+            errorMessage(PROBLEM_UPGRADING_DATABASE_TO_VERSION_400, e);
+            throw new StartupException(PROBLEM_UPGRADING_DATABASE_TO_VERSION_400, e);
         }
 
         // finally, upgrade db version string to 400
@@ -772,9 +772,9 @@ public class DatabaseInstaller {
     public String getDatabaseHandle(Connection con) throws SQLException {
 
         String productName = con.getMetaData().getDatabaseProductName();
-        String handle = "mysql";
-        if (       productName.toLowerCase().contains("mysql")) {
-            handle =  "mysql";
+        String handle = MYSQL;
+        if (       productName.toLowerCase().contains(MYSQL)) {
+            handle =  MYSQL;
         } else if (productName.toLowerCase().contains("derby")) {
             handle =  "derby";
         } else if (productName.toLowerCase().contains("hsql")) {
@@ -918,5 +918,11 @@ public class DatabaseInstaller {
             throw new StartupException("Error setting database version.", se);
         }
     }
+    
+    private static final String MYSQL = "mysql";
+    
+    private static final String PROBLEM_UPGRADING_DATABASE_TO_VERSION_400 = "Problem upgrading database to version 400";
+    
+    private static final String PROBLEM_UPGRADING_DATABASE_TO_VERSION_320 = "Problem upgrading database to version 320";
 
 }

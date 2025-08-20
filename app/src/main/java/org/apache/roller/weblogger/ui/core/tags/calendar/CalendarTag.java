@@ -185,7 +185,7 @@ public class CalendarTag extends TagSupport {
             pw.print("<td colspan=\"7\" align=\"center\" "+
                     "class=\"hCalendarMonthYearRow"+mClassSuffix+"\">");
             if (model.getPrevMonth() != null) {
-                pw.print("<a href=\"" + model.computePrevMonthUrl()
+                pw.print(A_HREF + model.computePrevMonthUrl()
                         + "\" title=\"" + bundle.getString("calendar.prev")
                         + "\" class=\"hCalendarNavBar\">&laquo;</a> ");
             }
@@ -244,12 +244,12 @@ public class CalendarTag extends TagSupport {
                     +mClassSuffix+"\">");
             pw.print("<td colspan=\"7\" align=\"center\">");
             
-            pw.print("<a href=\""+model.computeTodayMonthUrl()
+            pw.print(A_HREF+model.computeTodayMonthUrl()
             +"\" class=\"hCalendarNavBar\">"
                     +bundle.getString("calendar.today")
                     +"</a>");
             
-            pw.print("</td>");
+            pw.print(TD);
             pw.print("</tr>");
             
             pw.print("</table>");
@@ -266,53 +266,53 @@ public class CalendarTag extends TagSupport {
         pw.print("<td class=\"hCalendarDayNotInMonth"+mClassSuffix+"\">");
         //pw.print(cal.get(Calendar.DAY_OF_MONTH));
         pw.print("&nbsp;");
-        pw.print("</td>");
+        pw.print(TD);
     }
     
     private void printDayInThisMonth(PrintWriter pw, Calendar cal, String url, String content) {
         if ( content!=null ) {
-            pw.print("<td class=\"hCalendarDayCurrent"
+            pw.print(TD_CLASS_HCALENDARDAYCURRENT
                     +mClassSuffix+"\">");
             pw.print( content );
-            pw.print("</td>");
+            pw.print(TD);
         } else if (url!=null) {
             pw.print("<td class=\"hCalendarDayLinked"
                     +mClassSuffix+"\">");
-            pw.print("<div class=\"hCalendarDayTitle"
+            pw.print(DIV_CLASS_HCALENDARDAYTITLE
                     +mClassSuffix+"\">");
-            pw.print("<a href=\""+url+"\">");
+            pw.print(A_HREF+url+"\">");
             pw.print(cal.get(Calendar.DAY_OF_MONTH));
             pw.print("</a></div>");
-            pw.print("</td>");
+            pw.print(TD);
         } else {
             pw.print("<td class=\"hCalendarDay"
                     +mClassSuffix+"\">");
-            pw.print("<div class=\"hCalendarDayTitle"
+            pw.print(DIV_CLASS_HCALENDARDAYTITLE
                     +mClassSuffix+"\">");
             pw.print(cal.get(Calendar.DAY_OF_MONTH));
             pw.print("</div>");
-            pw.print("</td>");
+            pw.print(TD);
         }
     }
     
     private void printToday(PrintWriter pw, Calendar cal, String url, String content) {
         if ( content!=null ) {
-            pw.print("<td class=\"hCalendarDayCurrent"
+            pw.print(TD_CLASS_HCALENDARDAYCURRENT
                     +mClassSuffix+"\">");
             pw.print( content );
-            pw.print("</td>");
+            pw.print(TD);
         } else if (url!=null) {
-            pw.print("<td class=\"hCalendarDayCurrent"
+            pw.print(TD_CLASS_HCALENDARDAYCURRENT
                     +mClassSuffix+"\">");
-            pw.print("<a href=\""+url+"\" "
+            pw.print(A_HREF+url+"\" "
                     +"class=\"hCalendarDayTitle"+mClassSuffix+"\">");
             pw.print(cal.get(Calendar.DAY_OF_MONTH));
             pw.print("</a>");
-            pw.print("</td>");
+            pw.print(TD);
         } else {
-            pw.print("<td class=\"hCalendarDayCurrent"
+            pw.print(TD_CLASS_HCALENDARDAYCURRENT
                     +mClassSuffix+"\">");
-            pw.print("<div class=\"hCalendarDayTitle"
+            pw.print(DIV_CLASS_HCALENDARDAYTITLE
                     +mClassSuffix+"\">");
             pw.print(cal.get(Calendar.DAY_OF_MONTH));
             pw.print("</div></td>");
@@ -372,6 +372,14 @@ public class CalendarTag extends TagSupport {
     public int doEndTag( PrintWriter pw ) throws JspException {
         return EVAL_PAGE;
     }
+    
+    private static final String A_HREF = "<a href=\"";
+    
+    private static final String TD = "</td>";
+    
+    private static final String TD_CLASS_HCALENDARDAYCURRENT = "<td class=\"hCalendarDayCurrent";
+    
+    private static final String DIV_CLASS_HCALENDARDAYTITLE = "<div class=\"hCalendarDayTitle";
 
 }
 

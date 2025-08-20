@@ -121,7 +121,7 @@ public class WeblogPageRequest extends WeblogRequest {
             // now check the rest of the path and extract other details
             if (pathElements.length == 2) {
 
-                if ("entry".equals(this.context)) {
+                if (ENTRY.equals(this.context)) {
                     this.weblogAnchor = URLUtilities.decode(pathElements[1]);
 
                     // Other page
@@ -204,13 +204,13 @@ public class WeblogPageRequest extends WeblogRequest {
         if (pathInfo == null || this.weblogPageName != null) {
 
             // check for entry/anchor params which indicate permalink
-            if (request.getParameter("entry") != null) {
-                String anchor = request.getParameter("entry");
+            if (request.getParameter(ENTRY) != null) {
+                String anchor = request.getParameter(ENTRY);
                 if (StringUtils.isNotEmpty(anchor)) {
                     this.weblogAnchor = anchor;
                 }
-            } else if (request.getParameter("anchor") != null) {
-                String anchor = request.getParameter("anchor");
+            } else if (request.getParameter(ANCHOR) != null) {
+                String anchor = request.getParameter(ANCHOR);
                 if (StringUtils.isNotEmpty(anchor)) {
                     this.weblogAnchor = anchor;
                 }
@@ -249,8 +249,8 @@ public class WeblogPageRequest extends WeblogRequest {
         // build customParams Map, we remove built-in params because we only
         // want this map to represent params defined by the template author
         customParams = new HashMap<>(request.getParameterMap());
-        customParams.remove("entry");
-        customParams.remove("anchor");
+        customParams.remove(ENTRY);
+        customParams.remove(ANCHOR);
         customParams.remove("date");
         customParams.remove("cat");
         customParams.remove("page");
@@ -438,5 +438,9 @@ public class WeblogPageRequest extends WeblogRequest {
     public void setOtherPageHit(boolean otherPageHit) {
         this.otherPageHit = otherPageHit;
     }
+    
+    private static final String ENTRY = "entry";
+    
+    private static final String ANCHOR = "anchor";
 
 }

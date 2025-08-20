@@ -167,7 +167,7 @@ public class PasswordUtility
         PreparedStatement userQuery = con
         	.prepareStatement("select username,passphrase from roller_user");
         PreparedStatement userUpdate = con
-        	.prepareStatement("update roller_user set passphrase=? where username=?");
+        	.prepareStatement(UPDATE_ROLLER_USER_SET_PASSPHRASE_WHERE_USERNAME);
 
         Properties props = new Properties();
         ResultSet users = userQuery.executeQuery();
@@ -197,7 +197,7 @@ public class PasswordUtility
                     Connection con, String fileName) throws Exception
     {
         PreparedStatement userUpdate = con
-			.prepareStatement("update roller_user set passphrase=? where username=?");
+			.prepareStatement(UPDATE_ROLLER_USER_SET_PASSPHRASE_WHERE_USERNAME);
 
         Properties props = new Properties();
         props.load(new FileInputStream(fileName));
@@ -221,7 +221,7 @@ public class PasswordUtility
     	    throws Exception
     {
 		PreparedStatement userUpdate =
-            con.prepareStatement("update roller_user set passphrase=? where username=?");
+            con.prepareStatement(UPDATE_ROLLER_USER_SET_PASSPHRASE_WHERE_USERNAME);
 		
 		String newPassword = Utilities.encodePassword(password, algorithm);
 		userUpdate.setString(1, newPassword);
@@ -294,4 +294,6 @@ public class PasswordUtility
         roleDelete.setString(1, userid);
         roleDelete.executeUpdate();
     }
+    
+    private static final String UPDATE_ROLLER_USER_SET_PASSPHRASE_WHERE_USERNAME = "update roller_user set passphrase=? where username=?";
 }

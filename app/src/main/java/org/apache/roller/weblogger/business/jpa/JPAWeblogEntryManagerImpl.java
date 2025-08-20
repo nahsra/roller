@@ -1200,7 +1200,7 @@ public class JPAWeblogEntryManagerImpl implements WeblogEntryManager {
     @Override
     public WeblogHitCount getHitCountByWeblog(Weblog weblog)
     throws WebloggerException {
-        TypedQuery<WeblogHitCount> q = strategy.getNamedQuery("WeblogHitCount.getByWeblog", WeblogHitCount.class);
+        TypedQuery<WeblogHitCount> q = strategy.getNamedQuery(WEBLOGHITCOUNT_GETBYWEBLOG, WeblogHitCount.class);
         q.setParameter(1, weblog);
         try {
             return q.getSingleResult();
@@ -1280,7 +1280,7 @@ public class JPAWeblogEntryManagerImpl implements WeblogEntryManager {
             throw new WebloggerException("Website cannot be NULL.");
         }
 
-        TypedQuery<WeblogHitCount> q = strategy.getNamedQuery("WeblogHitCount.getByWeblog", WeblogHitCount.class);
+        TypedQuery<WeblogHitCount> q = strategy.getNamedQuery(WEBLOGHITCOUNT_GETBYWEBLOG, WeblogHitCount.class);
         q.setParameter(1, weblog);
         WeblogHitCount hitCount;
         try {
@@ -1315,7 +1315,7 @@ public class JPAWeblogEntryManagerImpl implements WeblogEntryManager {
      */
     @Override
     public void resetHitCount(Weblog weblog) throws WebloggerException {
-        TypedQuery<WeblogHitCount> q = strategy.getNamedQuery("WeblogHitCount.getByWeblog", WeblogHitCount.class);
+        TypedQuery<WeblogHitCount> q = strategy.getNamedQuery(WEBLOGHITCOUNT_GETBYWEBLOG, WeblogHitCount.class);
         q.setParameter(1, weblog);
         WeblogHitCount hitCount;
         try {
@@ -1390,4 +1390,6 @@ public class JPAWeblogEntryManagerImpl implements WeblogEntryManager {
         return whereClause.append(expression);
     }
     
+    private static final String WEBLOGHITCOUNT_GETBYWEBLOG = "WeblogHitCount.getByWeblog";
+
 }

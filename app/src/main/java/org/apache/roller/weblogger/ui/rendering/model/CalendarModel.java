@@ -47,7 +47,7 @@ public class CalendarModel implements Model {
     /** Template context name to be used for model */
     @Override
     public String getModelName() {
-        return "calendarModel";
+        return CALENDARMODEL;
     }
     
     
@@ -100,12 +100,12 @@ public class CalendarModel implements Model {
             }
             
             // save model in JSP page context so CalendarTag can find it
-            pageContext.setAttribute("calendarModel", model);
+            pageContext.setAttribute(CALENDARMODEL, model);
             
             CalendarTag calTag = new CalendarTag();
             calTag.setPageContext(pageContext);
             calTag.setName("calendar");
-            calTag.setModel("calendarModel");
+            calTag.setModel(CALENDARMODEL);
             calTag.setLocale(websiteWrapper.getLocaleInstance());
             if (big) {
                 calTag.setClassSuffix("Big");
@@ -117,4 +117,6 @@ public class CalendarModel implements Model {
         return ret;
     }
     
+    private static final String CALENDARMODEL = "calendarModel";
+
 }

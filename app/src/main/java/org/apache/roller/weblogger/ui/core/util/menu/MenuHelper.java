@@ -359,13 +359,13 @@ public final class MenuHelper {
         ParsedTab tab = new ParsedTab();
 
         tab.setName(element.getAttributeValue("name"));
-        if (element.getAttributeValue("weblogPerms") != null) {
+        if (element.getAttributeValue(WEBLOGPERMS) != null) {
             tab.setWeblogPermissionActions(Utilities.stringToStringList(
-                    element.getAttributeValue("weblogPerms"), ","));
+                    element.getAttributeValue(WEBLOGPERMS), ","));
         }
-        if (element.getAttributeValue("globalPerms") != null) {
+        if (element.getAttributeValue(GLOBALPERMS) != null) {
             tab.setGlobalPermissionActions(Utilities.stringToStringList(
-                    element.getAttributeValue("globalPerms"), ","));
+                    element.getAttributeValue(GLOBALPERMS), ","));
         }
         tab.setEnabledProperty(element.getAttributeValue("enabledProperty"));
         tab.setDisabledProperty(element.getAttributeValue("disabledProperty"));
@@ -439,18 +439,22 @@ public final class MenuHelper {
             tabItem.setSubActions(set);
         }
 
-        if (element.getAttributeValue("weblogPerms") != null) {
+        if (element.getAttributeValue(WEBLOGPERMS) != null) {
             tabItem.setWeblogPermissionActions(Utilities.stringToStringList(
-                    element.getAttributeValue("weblogPerms"), ","));
+                    element.getAttributeValue(WEBLOGPERMS), ","));
         }
-        if (element.getAttributeValue("globalPerms") != null) {
+        if (element.getAttributeValue(GLOBALPERMS) != null) {
             tabItem.setGlobalPermissionActions(Utilities.stringToStringList(
-                    element.getAttributeValue("globalPerms"), ","));
+                    element.getAttributeValue(GLOBALPERMS), ","));
         }
         tabItem.setEnabledProperty(element.getAttributeValue("enabledProperty"));
         tabItem.setDisabledProperty(element.getAttributeValue("disabledProperty"));
 
         return tabItem;
     }
+    
+    private static final String WEBLOGPERMS = "weblogPerms";
+    
+    private static final String GLOBALPERMS = "globalPerms";
 
 }

@@ -59,7 +59,7 @@ public class UserEdit extends UIAction {
     private AuthMethod authMethod = WebloggerConfig.getAuthMethod();
 
     public UserEdit() {
-        this.desiredMenu = "admin";
+        this.desiredMenu = ADMIN_1;
     }
 
     @Override
@@ -190,12 +190,12 @@ public class UserEdit extends UIAction {
                 if (hasAdmin && !getBean().isAdministrator()) {
                     if (!isUserEditingSelf()) {
                         // revoke role
-                        mgr.revokeRole("admin", user);
+                        mgr.revokeRole(ADMIN_1, user);
                     } else {
                         addError("userAdmin.cantChangeOwnRole");
                     }
                 } else if(!hasAdmin && getBean().isAdministrator()) {
-                    mgr.grantRole("admin", user);
+                    mgr.grantRole(ADMIN_1, user);
                 }
                 WebloggerFactory.getWeblogger().flush();
 
@@ -283,4 +283,6 @@ public class UserEdit extends UIAction {
     public String getAuthMethod() {
         return authMethod.name();
     }
+    
+    private static final String ADMIN_1 = "admin";
 }

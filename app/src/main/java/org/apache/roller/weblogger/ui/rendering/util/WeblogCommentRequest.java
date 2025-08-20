@@ -88,18 +88,18 @@ public class WeblogCommentRequest extends WeblogRequest {
                 if("entry".equals(context)) {
                     this.weblogAnchor = URLDecoder.decode(pathElements[1], StandardCharsets.UTF_8);
                 } else {
-                    throw new InvalidRequestException("bad path info, "+
+                    throw new InvalidRequestException(BAD_PATH_INFO+
                             request.getRequestURL());
                 }
                 
             } else {
-                throw new InvalidRequestException("bad path info, "+
+                throw new InvalidRequestException(BAD_PATH_INFO+
                         request.getRequestURL());
             }
             
         } else {
             // bad request
-            throw new InvalidRequestException("bad path info, "+
+            throw new InvalidRequestException(BAD_PATH_INFO+
                     request.getRequestURL());
         }
         
@@ -210,4 +210,6 @@ public class WeblogCommentRequest extends WeblogRequest {
         this.weblogEntry = weblogEntry;
     }
     
+    private static final String BAD_PATH_INFO = "bad path info, ";
+
 }

@@ -68,7 +68,7 @@ public class BookmarkEdit extends UIAction {
                     bookmark.setFolder(bmgr.getFolder(getFolderId()));
                 }
             } catch (WebloggerException ex) {
-                addError("generic.error.check.logs");
+                addError(GENERIC_ERROR_CHECK_LOGS);
                 log.error("Error looking up folder", ex);
             }
         } else {
@@ -77,7 +77,7 @@ public class BookmarkEdit extends UIAction {
                 BookmarkManager bmgr = WebloggerFactory.getWeblogger().getBookmarkManager();
                 bookmark = bmgr.getBookmark(getBean().getId());
             } catch (WebloggerException ex) {
-                addError("generic.error.check.logs");
+                addError(GENERIC_ERROR_CHECK_LOGS);
                 log.error("Error looking up bookmark" + getBean().getId(), ex);
             }
         }
@@ -110,7 +110,7 @@ public class BookmarkEdit extends UIAction {
 
             } catch(Exception ex) {
                 log.error("Error saving bookmark", ex);
-                addError("generic.error.check.logs");
+                addError(GENERIC_ERROR_CHECK_LOGS);
             }
         }
         
@@ -149,5 +149,7 @@ public class BookmarkEdit extends UIAction {
     public WeblogBookmark getBookmark() {
         return bookmark;
     }
+    
+    private static final String GENERIC_ERROR_CHECK_LOGS = "generic.error.check.logs";
 
 }

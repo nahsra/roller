@@ -68,7 +68,7 @@ public class PreviewURLStrategy extends MultiWeblogURLStrategy {
         
         Map<String, String> params = Collections.emptyMap();
         if(previewTheme != null) {
-            params = Map.of("theme", URLUtilities.encode(previewTheme));
+            params = Map.of(THEME, URLUtilities.encode(previewTheme));
         }
         
         return url.append(URLUtilities.getQueryString(params)).toString();
@@ -105,7 +105,7 @@ public class PreviewURLStrategy extends MultiWeblogURLStrategy {
         
         Map<String, String> params = new HashMap<>();
         if(previewTheme != null) {
-            params.put("theme", URLUtilities.encode(previewTheme));
+            params.put(THEME, URLUtilities.encode(previewTheme));
         }
         if(previewAnchor != null) {
             params.put("previewEntry", URLUtilities.encode(previewAnchor));
@@ -175,7 +175,7 @@ public class PreviewURLStrategy extends MultiWeblogURLStrategy {
         }
         
         if(previewTheme != null) {
-            params.put("theme", URLUtilities.encode(previewTheme));
+            params.put(THEME, URLUtilities.encode(previewTheme));
         }
 
         return pathinfo.append(URLUtilities.getQueryString(params)).toString();
@@ -216,7 +216,7 @@ public class PreviewURLStrategy extends MultiWeblogURLStrategy {
         }
         
         if(previewTheme != null) {
-            params.put("theme", URLUtilities.encode(previewTheme));
+            params.put(THEME, URLUtilities.encode(previewTheme));
         }
         
         if(pageLink != null) {
@@ -272,10 +272,12 @@ public class PreviewURLStrategy extends MultiWeblogURLStrategy {
         
         Map<String, String> params = Collections.emptyMap();
         if(previewTheme != null && !WeblogTheme.CUSTOM.equals(previewTheme)) {
-            params = Map.of("theme", URLUtilities.encode(previewTheme));
+            params = Map.of(THEME, URLUtilities.encode(previewTheme));
         }
         
         return url.append(URLUtilities.getQueryString(params)).toString();
     }
     
+    private static final String THEME = "theme";
+
 }

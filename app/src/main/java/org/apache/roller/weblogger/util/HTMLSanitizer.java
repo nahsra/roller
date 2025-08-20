@@ -188,7 +188,7 @@ public class HTMLSanitizer {
                         // we will accept href in case of <A>
                         // <a href="......">
                         if ("a".equals(tag) && "href".equals(attr)) {
-                            String[] customSchemes = {"http", "https"};
+                            String[] customSchemes = {"http", HTTPS};
                             if (new UrlValidator(customSchemes).isValid(val)) {
                                 foundURL = true;
                             } else {
@@ -210,7 +210,7 @@ public class HTMLSanitizer {
 
                         } else if (tag.matches("img|embed") && "src".equals(attr)) {
                             // <img src="......">
-                            String[] customSchemes = {"http", "https"};
+                            String[] customSchemes = {"http", HTTPS};
                             if (new UrlValidator(customSchemes).isValid(val)) {
                                 foundURL = true;
                             } else {
@@ -248,7 +248,7 @@ public class HTMLSanitizer {
                                 // check if valid url
                                 Matcher urlStyleMatcher = urlStylePattern.matcher(styleValue);
                                 if (urlStyleMatcher.find()) {
-                                    String[] customSchemes = {"http", "https"};
+                                    String[] customSchemes = {"http", HTTPS};
                                     String url = urlStyleMatcher.group(1);
                                     if (!new UrlValidator(customSchemes).isValid(url)) {
                                         ret.invalidTags.add(tag + " " + attr + " " + styleValue);
@@ -523,4 +523,6 @@ public class HTMLSanitizer {
         }
         return new String(buffer);
     }
+    
+    private static final String HTTPS = "https";
 }

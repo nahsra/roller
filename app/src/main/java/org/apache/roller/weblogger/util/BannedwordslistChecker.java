@@ -70,9 +70,9 @@ public final class BannedwordslistChecker {
             List<Pattern> regexRules = new ArrayList<>();
             Bannedwordslist.populateSpamRules(
                 website.getBannedwordslist(), stringRules, regexRules, null);
-            if (WebloggerRuntimeConfig.getProperty("spam.bannedwordslist") != null) {
+            if (WebloggerRuntimeConfig.getProperty(SPAM_BANNEDWORDSLIST) != null) {
                 Bannedwordslist.populateSpamRules(
-                    WebloggerRuntimeConfig.getProperty("spam.bannedwordslist"), stringRules, regexRules, null);
+                    WebloggerRuntimeConfig.getProperty(SPAM_BANNEDWORDSLIST), stringRules, regexRules, null);
             }
             return Bannedwordslist.matchesRulesOnly(referrerURL, stringRules, regexRules);
         }
@@ -90,7 +90,7 @@ public final class BannedwordslistChecker {
         Weblog website = c.getWeblogEntry().getWebsite();
         Bannedwordslist.populateSpamRules(
             website.getBannedwordslist(), stringRules, regexRules,
-            WebloggerRuntimeConfig.getProperty("spam.bannedwordslist"));
+            WebloggerRuntimeConfig.getProperty(SPAM_BANNEDWORDSLIST));
         Bannedwordslist bannedwordslist = Bannedwordslist.getBannedwordslist();
         if (   bannedwordslist.isBannedwordslisted(c.getUrl(),     stringRules, regexRules)
             || bannedwordslist.isBannedwordslisted(c.getEmail(),   stringRules, regexRules)
@@ -100,5 +100,7 @@ public final class BannedwordslistChecker {
         }
         return ret;
     }        
+    
+    private static final String SPAM_BANNEDWORDSLIST = "spam.bannedwordslist";
 }
 

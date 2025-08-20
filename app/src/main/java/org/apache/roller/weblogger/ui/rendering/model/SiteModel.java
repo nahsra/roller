@@ -326,7 +326,7 @@ public class SiteModel implements Model {
                 results.add(WeblogWrapper.wrap(perm.getWeblog(), urlStrategy));
             }
         } catch (Exception e) {
-            log.error("ERROR: fetching weblog list", e);
+            log.error(ERROR_FETCHING_WEBLOG_LIST, e);
         }
         return results;
     }
@@ -346,7 +346,7 @@ public class SiteModel implements Model {
                 results.add(UserWrapper.wrap(perm.getUser()));
             }
         } catch (Exception e) {
-            log.error("ERROR: fetching weblog list", e);
+            log.error(ERROR_FETCHING_WEBLOG_LIST, e);
         }
         return results;
     }
@@ -399,7 +399,7 @@ public class SiteModel implements Model {
                 results.add(WeblogWrapper.wrap(website, urlStrategy));
             }
         } catch (Exception e) {
-            log.error("ERROR: fetching weblog list", e);
+            log.error(ERROR_FETCHING_WEBLOG_LIST, e);
         }
         return results;
     }
@@ -420,7 +420,7 @@ public class SiteModel implements Model {
                 results.add(UserWrapper.wrap(user));
             }
         } catch (Exception e) {
-            log.error("ERROR: fetching weblog list", e);
+            log.error(ERROR_FETCHING_WEBLOG_LIST, e);
         }
         return results;
     }   
@@ -589,4 +589,6 @@ public class SiteModel implements Model {
         return count;
     }
     
+    private static final String ERROR_FETCHING_WEBLOG_LIST = "ERROR: fetching weblog list";
+
 }

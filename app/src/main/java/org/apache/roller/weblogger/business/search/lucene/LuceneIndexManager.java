@@ -338,7 +338,7 @@ public class LuceneIndexManager implements IndexManager {
         try {
             return FSDirectory.open(Path.of(indexDir));
         } catch (IOException e) {
-            logger.error("Problem accessing index directory", e);
+            logger.error(PROBLEM_ACCESSING_INDEX_DIRECTORY, e);
         }
         return null;
     }
@@ -347,7 +347,7 @@ public class LuceneIndexManager implements IndexManager {
         try {
             return DirectoryReader.indexExists(getIndexDirectory());
         } catch (IOException e) {
-            logger.error("Problem accessing index directory", e);
+            logger.error(PROBLEM_ACCESSING_INDEX_DIRECTORY, e);
         }
         return false;
     }
@@ -362,7 +362,7 @@ public class LuceneIndexManager implements IndexManager {
                 Files.delete(Path.of(indexDir, file));
             }
         } catch (IOException ex) {
-             logger.error("Problem accessing index directory", ex);
+             logger.error(PROBLEM_ACCESSING_INDEX_DIRECTORY, ex);
         }
 
     }
@@ -482,4 +482,6 @@ public class LuceneIndexManager implements IndexManager {
             throw new WebloggerException(e);
         }
     }
+    
+    private static final String PROBLEM_ACCESSING_INDEX_DIRECTORY = "Problem accessing index directory";
 }

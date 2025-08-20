@@ -101,7 +101,7 @@ public class Register extends UIAction implements ServletRequestAware {
             }
         } catch (Exception e) {
             log.error("Error checking user count", e);
-            addError("generic.error.check.logs");
+            addError(GENERIC_ERROR_CHECK_LOGS);
             return DISABLED_RETURN_CODE;
         }
                 
@@ -247,7 +247,7 @@ public class Register extends UIAction implements ServletRequestAware {
 
             } catch (WebloggerException ex) {
                 log.error("Error adding new user", ex);
-                addError("generic.error.check.logs");
+                addError(GENERIC_ERROR_CHECK_LOGS);
             }
         }
         
@@ -411,7 +411,7 @@ public class Register extends UIAction implements ServletRequestAware {
                 }
             } catch (WebloggerException ex) {
                 log.error("error checking for user", ex);
-                addError("generic.error.check.logs");
+                addError(GENERIC_ERROR_CHECK_LOGS);
             }
         }
 	}
@@ -427,7 +427,7 @@ public class Register extends UIAction implements ServletRequestAware {
                 }
             } catch (WebloggerException ex) {
                 log.error("error checking OpenID URL", ex);
-                addError("generic.error.check.logs");
+                addError(GENERIC_ERROR_CHECK_LOGS);
             }
         }
 	}
@@ -466,4 +466,6 @@ public class Register extends UIAction implements ServletRequestAware {
         this.activationCode = activationCode;
     }
     
+    private static final String GENERIC_ERROR_CHECK_LOGS = "generic.error.check.logs";
+
 }

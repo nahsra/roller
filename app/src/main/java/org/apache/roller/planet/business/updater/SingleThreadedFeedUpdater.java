@@ -202,17 +202,17 @@ public class SingleThreadedFeedUpdater implements FeedUpdater {
 				}
 				
 				if (log.isDebugEnabled()) {
-					log.debug("Error updating subscription - "+sub.getFeedURL(), cause);
+					log.debug(ERROR_UPDATING_SUBSCRIPTION+sub.getFeedURL(), cause);
 				} else {
-					log.warn("Error updating subscription - "+sub.getFeedURL()
+					log.warn(ERROR_UPDATING_SUBSCRIPTION+sub.getFeedURL()
 						+ " turn on debug logging for more info");
 				}
 				
 			} catch(Exception ex) {
 				if (log.isDebugEnabled()) {
-					log.warn("Error updating subscription - "+sub.getFeedURL(), ex);
+					log.warn(ERROR_UPDATING_SUBSCRIPTION+sub.getFeedURL(), ex);
 				} else {
-					log.warn("Error updating subscription - "+sub.getFeedURL()
+					log.warn(ERROR_UPDATING_SUBSCRIPTION+sub.getFeedURL()
 						+ " turn on debug logging for more info");
 				}
 			}
@@ -234,4 +234,6 @@ public class SingleThreadedFeedUpdater implements FeedUpdater {
         System.setProperty("sun.net.client.defaultReadTimeout", "15000");
     }
     
+    private static final String ERROR_UPDATING_SUBSCRIPTION = "Error updating subscription - ";
+
 }

@@ -234,8 +234,8 @@ public class PageServlet extends HttpServlet {
 
         // cached content checking
         if ((!this.excludeOwnerPages || !pageRequest.isLoggedIn())
-                && request.getAttribute("skipCache") == null
-                && request.getParameter("skipCache") == null) {
+                && request.getAttribute(SKIPCACHE) == null
+                && request.getParameter(SKIPCACHE) == null) {
 
             CachedContent cachedContent;
             if (isSiteWide) {
@@ -533,7 +533,7 @@ public class PageServlet extends HttpServlet {
 
         // cache rendered content. only cache if user is not logged in?
         if ((!this.excludeOwnerPages || !pageRequest.isLoggedIn())
-                && request.getAttribute("skipCache") == null) {
+                && request.getAttribute(SKIPCACHE) == null) {
             log.debug("PUT " + cacheKey);
 
             // put it in the right cache
@@ -562,7 +562,7 @@ public class PageServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // make sure caching is disabled
-        request.setAttribute("skipCache", "true");
+        request.setAttribute(SKIPCACHE, "true");
 
         // handle just like a GET request
         this.doGet(request, response);
@@ -676,4 +676,6 @@ public class PageServlet extends HttpServlet {
 
         return false;
     }
+    
+    private static final String SKIPCACHE = "skipCache";
 }

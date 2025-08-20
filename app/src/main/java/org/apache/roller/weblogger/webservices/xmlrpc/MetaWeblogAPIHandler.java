@@ -79,8 +79,8 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
     throws Exception {
         
         mLogger.debug("getCategories() Called =====[ SUPPORTED ]=====");
-        mLogger.debug("     BlogId: " + blogid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(BLOGID + blogid);
+        mLogger.debug(USERID + userid);
         
         Weblog website = validate(blogid, userid,password);
         Weblogger roller = WebloggerFactory.getWeblogger();
@@ -124,7 +124,7 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
         
         mLogger.debug("editPost() Called ========[ SUPPORTED ]=====");
         mLogger.debug("     PostId: " + postid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(USERID + userid);
         mLogger.debug("    Publish: " + publish);
         
         Weblogger roller = WebloggerFactory.getWeblogger();
@@ -134,20 +134,20 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
         validate(entry.getWebsite().getHandle(), userid,password);
         
         Hashtable<String, ?> postcontent = struct;
-        String description = (String)postcontent.get("description");
-        String title = (String)postcontent.get("title");
+        String description = (String)postcontent.get(DESCRIPTION);
+        String title = (String)postcontent.get(TITLE);
         if (title == null) {
             title = "";
         }
         
-        Date dateCreated = (Date)postcontent.get("dateCreated");
+        Date dateCreated = (Date)postcontent.get(DATECREATED);
         if (dateCreated == null) {
-            dateCreated = (Date)postcontent.get("pubDate");
+            dateCreated = (Date)postcontent.get(PUBDATE);
         }
         
         String cat = null;
-        if ( postcontent.get("categories") != null ) {
-            Object[] cats = (Object[])postcontent.get("categories");
+        if ( postcontent.get(CATEGORIES) != null ) {
+            Object[] cats = (Object[])postcontent.get(CATEGORIES);
             if (cats.length > 0) {
             	cat = (String)cats[0];
             }
@@ -223,15 +223,15 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
             Hashtable<String, ?> struct, boolean publish) throws Exception {
         
         mLogger.debug("newPost() Called ===========[ SUPPORTED ]=====");
-        mLogger.debug("     BlogId: " + blogid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(BLOGID + blogid);
+        mLogger.debug(USERID + userid);
         mLogger.debug("    Publish: " + publish);
         
         Weblog website = validate(blogid, userid, password);
         
         Hashtable<String, ?> postcontent = struct;
-        String description = (String)postcontent.get("description");
-        String title = (String)postcontent.get("title");
+        String description = (String)postcontent.get(DESCRIPTION);
+        String title = (String)postcontent.get(TITLE);
         if (StringUtils.isEmpty(title) && StringUtils.isEmpty(description)) {
             throw new XmlRpcException(
                     BLOGGERAPI_INCOMPLETE_POST, "Must specify title or description");
@@ -240,9 +240,9 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
             title = Utilities.truncateNicely(description, 15, 15, "...");
         }
         
-        Date dateCreated = (Date)postcontent.get("dateCreated");
+        Date dateCreated = (Date)postcontent.get(DATECREATED);
         if (dateCreated == null) {
-            dateCreated = (Date)postcontent.get("pubDate");
+            dateCreated = (Date)postcontent.get(PUBDATE);
         }
         if (dateCreated == null) {
             dateCreated = new Date();
@@ -275,8 +275,8 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
             // MetaWeblog supports multiple cats, Weblogger supports one/entry
             // so here we take accept the first category that exists
             WeblogCategory rollerCat = null;
-            if ( postcontent.get("categories") != null ) {
-                Object[] cats = (Object[])postcontent.get("categories");
+            if ( postcontent.get(CATEGORIES) != null ) {
+                Object[] cats = (Object[])postcontent.get(CATEGORIES);
                 if (cats != null && cats.length > 0) {
                     mLogger.debug("cats type - "+cats[0].getClass().getName());
                     mLogger.debug("cat to string - "+cats[0].toString());
@@ -328,7 +328,7 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
         
         mLogger.debug("getPost() Called =========[ SUPPORTED ]=====");
         mLogger.debug("     PostId: " + postid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(USERID + userid);
         
         Weblogger roller = WebloggerFactory.getWeblogger();
         WeblogEntryManager weblogMgr = roller.getWeblogEntryManager();
@@ -358,8 +358,8 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
             Hashtable<String, ?> struct) throws Exception {
         
         mLogger.debug("newMediaObject() Called =[ SUPPORTED ]=====");
-        mLogger.debug("     BlogId: " + blogid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(BLOGID + blogid);
+        mLogger.debug(USERID + userid);
         mLogger.debug("   Password: *********");
         
         Weblog website = validate(blogid, userid, password);
@@ -421,8 +421,8 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
             int numposts) throws Exception {
         
         mLogger.debug("getRecentPosts() Called ===========[ SUPPORTED ]=====");
-        mLogger.debug("     BlogId: " + blogid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(BLOGID + blogid);
+        mLogger.debug(USERID + userid);
         mLogger.debug("     Number: " + numposts);
         
         Weblog website = validate(blogid, userid,password);
@@ -459,14 +459,14 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
             WebloggerRuntimeConfig.getAbsoluteContextURL() + entry.getPermaLink();
         
         Hashtable<String, Object> struct = new Hashtable<>();
-        struct.put("title", entry.getTitle());
+        struct.put(TITLE, entry.getTitle());
         if (entry.getLink() != null) {
             struct.put("link", Utilities.escapeHTML(entry.getLink()));
         }
-        struct.put("description", entry.getText());
+        struct.put(DESCRIPTION, entry.getText());
         if (entry.getPubTime() != null) {
-            struct.put("pubDate", entry.getPubTime());
-            struct.put("dateCreated", entry.getPubTime());
+            struct.put(PUBDATE, entry.getPubTime());
+            struct.put(DATECREATED, entry.getPubTime());
         }
         struct.put("guid", Utilities.escapeHTML(permalink));
         struct.put("permaLink", Utilities.escapeHTML(permalink));
@@ -478,7 +478,7 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
         if ( entry.getCategory() != null ) {
             Vector<Object> catArray = new Vector<>();
             catArray.addElement(entry.getCategory().getName());
-            struct.put("categories", catArray);
+            struct.put(CATEGORIES, catArray);
 
         } else {
             mLogger.warn("Entry " + entry.getId() + " has null category");
@@ -491,8 +491,8 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
     private Hashtable<String, String> createCategoryStruct(WeblogCategory category, String userid) {
         
         Hashtable<String, String> struct = new Hashtable<>();
-        struct.put("title", category.getName());
-        struct.put("description", category.getName());
+        struct.put(TITLE, category.getName());
+        struct.put(DESCRIPTION, category.getName());
         
         Weblogger roller = WebloggerFactory.getWeblogger();
         URLStrategy strategy = roller.getUrlStrategy();
@@ -508,4 +508,18 @@ public class MetaWeblogAPIHandler extends BloggerAPIHandler {
         return struct;
     }
     
+    private static final String DESCRIPTION = "description";
+    
+    private static final String TITLE = "title";
+    
+    private static final String PUBDATE = "pubDate";
+    
+    private static final String BLOGID = "     BlogId: ";
+    
+    private static final String USERID = "     UserId: ";
+    
+    private static final String DATECREATED = "dateCreated";
+    
+    private static final String CATEGORIES = "categories";
+
 }

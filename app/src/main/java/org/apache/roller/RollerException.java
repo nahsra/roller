@@ -104,7 +104,7 @@ public abstract class RollerException extends Exception {
     public void printStackTrace() {
         super.printStackTrace();
         if (mRootCause != null) {
-            System.out.println("--- ROOT CAUSE ---");
+            System.out.println(ROOT_CAUSE);
             mRootCause.printStackTrace();
         }
     }
@@ -118,7 +118,7 @@ public abstract class RollerException extends Exception {
     public void printStackTrace(PrintStream s) {
         super.printStackTrace(s);
         if (mRootCause != null) {
-            s.println("--- ROOT CAUSE ---");
+            s.println(ROOT_CAUSE);
             mRootCause.printStackTrace(s);
         }
     }
@@ -132,9 +132,11 @@ public abstract class RollerException extends Exception {
     public void printStackTrace(PrintWriter s) {
         super.printStackTrace(s);
         if (null != mRootCause) {
-            s.println("--- ROOT CAUSE ---");
+            s.println(ROOT_CAUSE);
             mRootCause.printStackTrace(s);
         }
     }
+    
+    private static final String ROOT_CAUSE = "--- ROOT CAUSE ---";
 
 }

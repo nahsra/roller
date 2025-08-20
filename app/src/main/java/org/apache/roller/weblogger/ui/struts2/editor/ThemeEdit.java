@@ -142,7 +142,7 @@ public class ThemeEdit extends UIAction {
                 } catch (Exception re) {
                     log.error("Error customizing theme for weblog - "
                             + getActionWeblog().getHandle(), re);
-                    addError("generic.error.check.logs");
+                    addError(GENERIC_ERROR_CHECK_LOGS);
                     return execute();
                 }
             }
@@ -163,7 +163,7 @@ public class ThemeEdit extends UIAction {
                 } catch (WebloggerException re) {
                     log.error("Error saving weblog - "
                             + getActionWeblog().getHandle(), re);
-                    addError("generic.error.check.logs");
+                    addError(GENERIC_ERROR_CHECK_LOGS);
                 }
             }
 
@@ -218,7 +218,7 @@ public class ThemeEdit extends UIAction {
 
                 } catch (WebloggerException re) {
                     log.error("Error saving weblog - " + getActionWeblog().getHandle(), re);
-                    addError("generic.error.check.logs");
+                    addError(GENERIC_ERROR_CHECK_LOGS);
                 }
             }
         }
@@ -288,5 +288,7 @@ public class ThemeEdit extends UIAction {
     public boolean isSharedThemeCustomStylesheet() {
         return sharedThemeCustomStylesheet;
     }
+    
+    private static final String GENERIC_ERROR_CHECK_LOGS = "generic.error.check.logs";
 
 }

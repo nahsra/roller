@@ -164,7 +164,7 @@ public class JPAMediaFileManagerImpl implements MediaFileManager {
 
         requestedName = requestedName.startsWith("/") ? requestedName.substring(1) : requestedName;
 
-        if (requestedName.isEmpty() || requestedName.equals("default")) {
+        if (requestedName.isEmpty() || requestedName.equals(DEFAULT)) {
             // Default cannot be created using this method.
             // Use createDefaultMediaFileDirectory instead
             throw new WebloggerException("Invalid name!");
@@ -191,7 +191,7 @@ public class JPAMediaFileManagerImpl implements MediaFileManager {
     @Override
     public MediaFileDirectory createDefaultMediaFileDirectory(Weblog weblog)
             throws WebloggerException {
-        MediaFileDirectory defaultDirectory = new MediaFileDirectory(weblog, "default",
+        MediaFileDirectory defaultDirectory = new MediaFileDirectory(weblog, DEFAULT,
                 "default directory");
         createMediaFileDirectory(defaultDirectory);
         return defaultDirectory;
@@ -471,7 +471,7 @@ public class JPAMediaFileManagerImpl implements MediaFileManager {
     @Override
     public MediaFileDirectory getDefaultMediaFileDirectory(Weblog weblog)
             throws WebloggerException {
-        return getMediaFileDirectoryByName(weblog, "default");
+        return getMediaFileDirectoryByName(weblog, DEFAULT);
     }
 
     /**
@@ -905,4 +905,6 @@ public class JPAMediaFileManagerImpl implements MediaFileManager {
             }
         }
     }
+    
+    private static final String DEFAULT = "default";
 }

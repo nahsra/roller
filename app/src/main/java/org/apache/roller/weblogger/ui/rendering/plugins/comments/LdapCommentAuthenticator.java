@@ -64,13 +64,13 @@ public class LdapCommentAuthenticator implements CommentAuthenticator {
 		String ldapUser = "";
 		String ldapPass  = "";
 		HttpSession session = request.getSession(true);
-		if (session.getAttribute("ldapUser") == null) {
-			session.setAttribute("ldapUser", "");
-			session.setAttribute("ldapPass", "");
+		if (session.getAttribute(LDAPUSER) == null) {
+			session.setAttribute(LDAPUSER, "");
+			session.setAttribute(LDAPPASS, "");
 		} else {
 			// preserve user data
-			String ldapUserTemp = request.getParameter("ldapUser");
-			String ldapPassTemp = request.getParameter("ldapPass");
+			String ldapUserTemp = request.getParameter(LDAPUSER);
+			String ldapPassTemp = request.getParameter(LDAPPASS);
 			ldapUser = ldapUserTemp != null ? ldapUserTemp : "";
 			ldapPass = ldapPassTemp != null ? ldapPassTemp : "";
 		}
@@ -110,8 +110,8 @@ public class LdapCommentAuthenticator implements CommentAuthenticator {
 		
 		boolean rollerPropertiesValid = validateRollerProperties(ldapDc, ldapOu, ldapPort, ldapHost);
 		
-		String ldapUser = request.getParameter("ldapUser");
-		String ldapPass = request.getParameter("ldapPass");
+		String ldapUser = request.getParameter(LDAPUSER);
+		String ldapPass = request.getParameter(LDAPPASS);
 		
 		boolean userDataValid = validateUsernamePass(ldapUser, ldapPass);
 		
@@ -204,5 +204,9 @@ public class LdapCommentAuthenticator implements CommentAuthenticator {
 		
 		return ret;
 	}
+	
+	private static final String LDAPUSER = "ldapUser";
+	
+	private static final String LDAPPASS = "ldapPass";
 
 }

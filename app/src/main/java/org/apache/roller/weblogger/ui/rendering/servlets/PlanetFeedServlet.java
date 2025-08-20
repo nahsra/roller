@@ -134,12 +134,12 @@ public class PlanetFeedServlet extends HttpServlet {
         try {
 
             // populate the rendering model
-            if (request.getParameter("group") != null) {
+            if (request.getParameter(GROUP) != null) {
                 Planet planetObject = planet.getWeblogger("default");
                 model.put(
-                        "group",
+                        GROUP,
                         planet.getGroup(planetObject,
-                                request.getParameter("group")));
+                                request.getParameter(GROUP)));
             }
 
             model.put("planet", planet);
@@ -291,4 +291,6 @@ public class PlanetFeedServlet extends HttpServlet {
 
         return key.toString();
     }
+    
+    private static final String GROUP = "group";
 }

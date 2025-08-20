@@ -80,9 +80,9 @@ public class BloggerAPIHandler extends BaseAPIHandler {
             String password, boolean publish) throws Exception {
         
         mLogger.debug("deletePost() Called =====[ SUPPORTED ]=====");
-        mLogger.debug("     Appkey: " + appkey);
+        mLogger.debug(APPKEY + appkey);
         mLogger.debug("     PostId: " + postid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(USERID + userid);
         
         Weblogger roller = WebloggerFactory.getWeblogger();
         WeblogEntryManager weblogMgr = roller.getWeblogEntryManager();
@@ -132,9 +132,9 @@ public class BloggerAPIHandler extends BaseAPIHandler {
             String templateType) throws Exception {
         
         mLogger.debug("setTemplate() Called =====[ SUPPORTED ]=====");
-        mLogger.debug("     Appkey: " + appkey);
-        mLogger.debug("     BlogId: " + blogid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(APPKEY + appkey);
+        mLogger.debug(BLOGID + blogid);
+        mLogger.debug(USERID + userid);
         mLogger.debug("   Template: " + templateData);
         mLogger.debug("       Type: " + templateType);
         
@@ -181,9 +181,9 @@ public class BloggerAPIHandler extends BaseAPIHandler {
             throws Exception {
         
         mLogger.debug("getTemplate() Called =====[ SUPPORTED ]=====");
-        mLogger.debug("     Appkey: " + appkey);
-        mLogger.debug("     BlogId: " + blogid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(APPKEY + appkey);
+        mLogger.debug(BLOGID + blogid);
+        mLogger.debug(USERID + userid);
         mLogger.debug("       Type: " + templateType);
         
         validate(blogid, userid,password);
@@ -220,8 +220,8 @@ public class BloggerAPIHandler extends BaseAPIHandler {
     throws Exception {
         
         mLogger.debug("getUserInfo() Called =====[ SUPPORTED ]=====");
-        mLogger.debug("     Appkey: " + appkey);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(APPKEY + appkey);
+        mLogger.debug(USERID + userid);
         
         validateUser(userid, password);
         
@@ -276,8 +276,8 @@ public class BloggerAPIHandler extends BaseAPIHandler {
     throws Exception {
         
         mLogger.debug("getUsersBlogs() Called ===[ SUPPORTED ]=======");
-        mLogger.debug("     Appkey: " + appkey);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(APPKEY + appkey);
+        mLogger.debug(USERID + userid);
         
         Vector<Object> result = new Vector<>();
         if (validateUser(userid, password)) {
@@ -324,9 +324,9 @@ public class BloggerAPIHandler extends BaseAPIHandler {
             throws Exception {
         
         mLogger.debug("editPost() Called ========[ SUPPORTED ]=====");
-        mLogger.debug("     Appkey: " + appkey);
+        mLogger.debug(APPKEY + appkey);
         mLogger.debug("     PostId: " + postid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(USERID + userid);
         mLogger.debug("    Publish: " + publish);
         mLogger.debug("     Content:\n " + content);
         
@@ -380,9 +380,9 @@ public class BloggerAPIHandler extends BaseAPIHandler {
             throws Exception {
         
         mLogger.debug("newPost() Called ===========[ SUPPORTED ]=====");
-        mLogger.debug("     Appkey: " + appkey);
-        mLogger.debug("     BlogId: " + blogid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(APPKEY + appkey);
+        mLogger.debug(BLOGID + blogid);
+        mLogger.debug(USERID + userid);
         mLogger.debug("    Publish: " + publish);
         mLogger.debug("    Content:\n " + content);
         
@@ -391,11 +391,11 @@ public class BloggerAPIHandler extends BaseAPIHandler {
         // extract the title from the content
         String title = "";
         
-        if (content.contains("<title>")) {
+        if (content.contains(TITLE)) {
             title =
-                    content.substring(content.indexOf("<title>") + 7,
+                    content.substring(content.indexOf(TITLE) + 7,
                     content.indexOf("</title>"));
-            content = StringUtils.replace(content, "<title>"+title+"</title>", "");
+            content = StringUtils.replace(content, TITLE+title+"</title>", "");
         }
         if (StringUtils.isEmpty(title)) {
             title = Utilities.truncateNicely(content, 15, 15, "...");
@@ -458,9 +458,9 @@ public class BloggerAPIHandler extends BaseAPIHandler {
             throws Exception {
         
         mLogger.debug("getRecentPosts() Called ===========[ SUPPORTED ]=====");
-        mLogger.debug("     Appkey: " + appkey);
-        mLogger.debug("     BlogId: " + blogid);
-        mLogger.debug("     UserId: " + userid);
+        mLogger.debug(APPKEY + appkey);
+        mLogger.debug(BLOGID + blogid);
+        mLogger.debug(USERID + userid);
         mLogger.debug("     Number: " + numposts);
         
         Weblog weblog = validate(blogid, userid,password);
@@ -497,4 +497,12 @@ public class BloggerAPIHandler extends BaseAPIHandler {
         }
     }
     
+    private static final String TITLE = "<title>";
+    
+    private static final String APPKEY = "     Appkey: ";
+    
+    private static final String USERID = "     UserId: ";
+    
+    private static final String BLOGID = "     BlogId: ";
+
 }

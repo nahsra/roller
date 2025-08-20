@@ -44,7 +44,7 @@ public class WeblogPermission extends ObjectPermission implements Serializable {
     public WeblogPermission(Weblog weblog, User user, String actions) {
         super("WeblogPermission user: " + user.getUserName());
         setActions(actions);
-        objectType = "Weblog";
+        objectType = WEBLOG;
         objectId = weblog.getHandle();
         userName = user.getUserName();
     }
@@ -52,7 +52,7 @@ public class WeblogPermission extends ObjectPermission implements Serializable {
     public WeblogPermission(Weblog weblog, User user, List<String> actions) {
         super("WeblogPermission user: " + user.getUserName());
         setActionsAsList(actions); 
-        objectType = "Weblog";
+        objectType = WEBLOG;
         objectId = weblog.getHandle();
         userName = user.getUserName();
     }
@@ -60,7 +60,7 @@ public class WeblogPermission extends ObjectPermission implements Serializable {
     public WeblogPermission(Weblog weblog, List<String> actions) {
         super("WeblogPermission user: N/A");
         setActionsAsList(actions); 
-        objectType = "Weblog";
+        objectType = WEBLOG;
         objectId = weblog.getHandle();
     }
     
@@ -143,4 +143,6 @@ public class WeblogPermission extends ObjectPermission implements Serializable {
                 .append(getActions())
                 .toHashCode();
     }
+    
+    private static final String WEBLOG = "Weblog";
 }

@@ -131,10 +131,10 @@ public abstract class WebloggerImpl implements Weblogger {
             log.error("roller-version.properties not found", e);
         }
         
-        version = props.getProperty("ro.version", "UNKNOWN");
-        revision = props.getProperty("ro.revision", "UNKNOWN");
-        buildTime = props.getProperty("ro.buildTime", "UNKNOWN");
-        buildUser = props.getProperty("ro.buildUser", "UNKNOWN");
+        version = props.getProperty("ro.version", UNKNOWN);
+        revision = props.getProperty("ro.revision", UNKNOWN);
+        buildTime = props.getProperty("ro.buildTime", UNKNOWN);
+        buildUser = props.getProperty("ro.buildUser", UNKNOWN);
     }
     
     
@@ -460,4 +460,6 @@ public abstract class WebloggerImpl implements Weblogger {
         return buildUser;
     }
     
+    private static final String UNKNOWN = "UNKNOWN";
+
 }
