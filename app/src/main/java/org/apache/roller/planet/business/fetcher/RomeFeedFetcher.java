@@ -29,6 +29,7 @@ import com.rometools.rome.io.XmlReader;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.sql.Timestamp;
@@ -45,7 +46,6 @@ import org.apache.roller.planet.pojos.SubscriptionEntry;
 import org.apache.roller.planet.pojos.Subscription;
 
 import static java.net.http.HttpResponse.BodyHandlers.ofInputStream;
-
 
 /**
  * A FeedFetcher based on Apache ROME and {@link java.net.http.HttpClient}.
@@ -84,6 +84,17 @@ public class RomeFeedFetcher implements FeedFetcher {
 
         if(feedURL == null) {
             throw new IllegalArgumentException("feed url cannot be null");
+        }
+        
+        URI uri;
+        try {
+            uri = new URI(feedURL);
+            String host = uri.getHost();
+            if (host == null || !host.equals("allowed.domain.com")) {
+                throw new FetcherException("Host not allowed: " + host);
+            }
+        } catch (URISyntaxException e) {
+            throw new FetcherException("Invalid URL syntax: " + feedURL, e);
         }
         
         // fetch the feed
